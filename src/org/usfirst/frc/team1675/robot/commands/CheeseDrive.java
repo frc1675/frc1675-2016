@@ -1,18 +1,17 @@
-
 package org.usfirst.frc.team1675.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team1675.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class CheeseDrive extends Command {
 
-    public ExampleCommand() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+    public CheeseDrive() {
+    	
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -21,6 +20,14 @@ public class ExampleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double turnPower = Robot.oi.getRightXAxis();
+    	double forwardPower = Robot.oi.getLeftYAxis();
+    	
+    	double rightPower = forwardPower - turnPower;
+    	double leftPower = forwardPower + turnPower;
+    	
+    	Robot.driveBase.setLeftMotorPower(leftPower);
+    	Robot.driveBase.setRightMotorPower(rightPower);
     }
 
     // Make this return true when this Command no longer needs to run execute()
