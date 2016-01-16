@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1675.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import org.usfirst.frc.team1675.robot.commands.ExampleCommand;
 
 /**
@@ -8,12 +11,39 @@ import org.usfirst.frc.team1675.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //// CREATING BUTTONS
+	
+	public static final int OPERATOR_LEFT_Y_AXIS = 1;
+	public Joystick operatorstick;
+
+
+	
+	
+	public OI(){
+		operatorstick = new Joystick(0);
+	}
+	
+	public double getRawLeftYAxis(){
+		
+		double leftYAxisValue = operatorstick.getRawAxis(OPERATOR_LEFT_Y_AXIS);
+		leftYAxisValue = checkForDeadzone(leftYAxisValue);
+		return leftYAxisValue;
+		
+	}
+    //// CREATING BUTTONS	
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
+
+	private double checkForDeadzone(double leftYAxisValue) {
+		if(leftYAxisValue < 0.1675){
+			return 0;
+		}
+		else{
+			return leftYAxisValue;
+		}
+	}
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
@@ -36,3 +66,4 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 }
 
+;

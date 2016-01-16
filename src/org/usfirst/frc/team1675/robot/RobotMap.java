@@ -6,6 +6,9 @@ package org.usfirst.frc.team1675.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	public static int armMotor = 0;//idk the port number
+	
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
