@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1675.robot;
 
 public class XBoxControllerMap {
-
 	// left analog stick
 	public static final int LEFT_X_AXIS = 0;
 	public static final int LEFT_Y_AXIS = 1;
