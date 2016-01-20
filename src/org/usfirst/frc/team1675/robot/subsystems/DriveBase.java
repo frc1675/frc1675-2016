@@ -27,23 +27,20 @@ public class DriveBase extends Subsystem {
 	
 	private Gyro gyro;
 	
-/*********************************************************************************CONSTRUCTOR************************************************************************************************/
 	public DriveBase(){
-		leftFront = new TalonSRX(RobotMap.DriveConstants.FRONT_LEFT_MOTOR_PORT);
-		leftMid = new TalonSRX(RobotMap.DriveConstants.MID_LEFT_MOTOR_PORT);
-		leftBack = new TalonSRX(RobotMap.DriveConstants.BACK_LEFT_MOTOR_PORT);
-		rightFront = new TalonSRX(RobotMap.DriveConstants.FRONT_RIGHT_MOTOR_PORT);
-		rightMid = new TalonSRX(RobotMap.DriveConstants.MID_RIGHT_MOTOR_PORT);
-		rightBack = new TalonSRX(RobotMap.DriveConstants.BACK_RIGHT_MOTOR_PORT);
+		leftFront = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		leftMid = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		leftBack = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		rightFront = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		rightMid = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		rightBack = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 		
-		leftEncoder = new Encoder(RobotMap.ENCODER_LEFT_A_CHANNEL, RobotMap.ENCODER_LEFT_B_CHANNEL);
-		rightEncoder = new Encoder(RobotMap.ENCODER_RIGHT_A_CHANNEL, RobotMap.ENCODER_RIGHT_B_CHANNEL);
+		leftEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		rightEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 		
-		gyro = new Gyro(RobotMap.GYRO_PORT);
+		gyro = new Gyro(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 	}
-	
-/******************************************************************************MOTOR POWER METHODS**********************************************************************************************/	
-	
+		
 	
 	//sets all of the motor powers on the left side
 	public void setLeftMotorPower(double speed){
@@ -60,8 +57,10 @@ public class DriveBase extends Subsystem {
 		setRightBackMotorPower(speed);
 	}
 	
-	
-	//*****************************************************INDIVIDUAL MOTOR SETTERS***************************************************************/
+	/**
+	 * 
+	 * @param speed
+	 */
 	public void setLeftFrontMotorPower(double speed){
 		leftFront.set(speed);
 	}
@@ -87,7 +86,6 @@ public class DriveBase extends Subsystem {
 	}
 	
 	
-/**********************************************************************INITCOMMAND****************************************************************************************************/
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new CheeseDrive());

@@ -11,12 +11,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	
-	
-	
-	
-	
-	
 	private Joystick driveStick;
 	
 	private JoystickButton driverRightBumperButton;
@@ -24,7 +18,7 @@ public class OI {
 	
 	public OI(){
 		
-		driveStick = new Joystick(XBoxControllerMap.DRIVER_PORT);
+		driveStick = new Joystick(XBoxControllerMap.DRIVER_CONTROLLER_PORT);
 		
 		driverRightBumperButton = new JoystickButton(driveStick, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 		driverLeftBumperButton = new JoystickButton(driveStick, XBoxControllerMap.LEFT_BUMPER_BUTTON);
@@ -34,29 +28,29 @@ public class OI {
 	
 	public double getLeftYAxis(){
 		double leftYAxisValue = driveStick.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-		leftYAxisValue = check4DeadZone(leftYAxisValue);
+		leftYAxisValue = checkforDeadZone(leftYAxisValue);
 		return leftYAxisValue;
 		
 	}
 	public double getRightXAxis(){
 		double rightXAxisValue = driveStick.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
-		rightXAxisValue = check4DeadZone(rightXAxisValue);
+		rightXAxisValue = checkforDeadZone(rightXAxisValue);
 		return rightXAxisValue;
 		
 	}
 	
 	public double getRightYAxis(){
 		double rightYAxisValue = driveStick.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		rightYAxisValue = check4DeadZone(rightYAxisValue);
+		rightYAxisValue = checkforDeadZone(rightYAxisValue);
 		return rightYAxisValue;
 	}
 	public double getLeftXAxis(){
 		double LeftXAxisValue = driveStick.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
-		LeftXAxisValue = check4DeadZone(LeftXAxisValue);
+		LeftXAxisValue = checkforDeadZone(LeftXAxisValue);
 		return LeftXAxisValue;
 	}
 	
-	public double check4DeadZone(double value){
+	public double checkforDeadZone(double value){
 		if(Math.abs(value)<XBoxControllerMap.DEAD_ZONE){
 			return 0;
 		}
