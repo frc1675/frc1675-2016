@@ -38,11 +38,13 @@ public class ClawSubSystem extends Subsystem {
 	public boolean hasBall(){
 		if(limitSwitch.get() == true){ //Change if no limit switch
 			return true;
-		} else if(buttonA.isPressed){ //buttonA is filler until we have controller map
-			return true;
-		} else{
-			return false;
-		}
+		} 
+		return false;
+//		else if(buttonA.isPressed){ //buttonA is filler until we have controller map
+//			return true;
+//		} else{
+//			return false;
+//		}
 	}
 
     public void initDefaultCommand() {
