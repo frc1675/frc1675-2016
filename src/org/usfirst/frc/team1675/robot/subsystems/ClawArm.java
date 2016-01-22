@@ -32,7 +32,7 @@ public class ClawArm extends Subsystem {
 		double angle = armSensor.get();
 		
 
-		if (angle <= minimum  || angle >= maximum) {
+		if (angle >= minimum  || angle <= maximum) {
 			armMotor.set(speed);
 			// if angle is less or equal to 90 OR if angle is greater or equal
 			// to 200, armMotor moves x speed
