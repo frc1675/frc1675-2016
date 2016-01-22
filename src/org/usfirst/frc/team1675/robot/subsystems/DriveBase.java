@@ -4,7 +4,8 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.CheeseDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -38,7 +39,7 @@ public class DriveBase extends Subsystem {
 		leftEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 		rightEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 		
-		gyro = new Gyro(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		gyro = new AnalogGyro(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
 	}
 		
 	
