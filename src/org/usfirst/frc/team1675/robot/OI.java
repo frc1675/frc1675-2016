@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team1675.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1675.robot.commands.MoveWithController;
+import org.usfirst.frc.team1675.robot.commands.SetArmPosition;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -14,9 +16,19 @@ public class OI {
 
 	public static final int OPERATOR_LEFT_Y_AXIS = 1;
 	public Joystick operatorstick;
+	public JoystickButton operatorButtonA;
+	public JoystickButton operatorButtonB;
+	
+	//home position
+	//scoring position
 
 	public OI() {
 		operatorstick = new Joystick(0);
+		operatorButtonB = new JoystickButton(operatorstick, XBoxControllerMap.A_BUTTON);
+		operatorButtonA = new JoystickButton(operatorstick, XBoxControllerMap.B_BUTTON);
+		
+		operatorButtonA.whenPressed(new SetArmPosition(RobotMap.ArmConstants.HOME_POSITION));//Home Position of Arm
+		operatorButtonB.whenPressed(new SetArmPosition(RobotMap.ArmConstants.SCORE_POSITION));//Scoring Position of Arm.
 	}
 
 	public double getRawLeftYAxis() {

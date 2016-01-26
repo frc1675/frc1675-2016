@@ -29,6 +29,7 @@ public class SetArmPosition extends Command {
 
 	protected boolean isFinished() {
 		return false;
+		//loop
 	}
 
 	protected void end() {

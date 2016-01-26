@@ -4,12 +4,10 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.MoveWithController;
 import org.usfirst.frc.team1675.robot.commands.SetArmPosition;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -21,19 +19,13 @@ public class ClawArm extends PIDSubsystem {
 	// Visibility (private) Type (SpeedController) Name (armMotor)
 	private Encoder armSensor;
 
-	public static final int minimum = 90;
-	public static final int maximum = 200;
-	
-	public static final double p = 0.01;
-	public static final double i = 0;
-	public static final double d = 0;
-	
 	public ClawArm() {
-		super(p, i, d);
+		super(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
+				RobotMap.ArmConstants.D);
 
-		armMotor = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_SIX);
-		armSensor = new Encoder(RobotMap.DIOChannels.EMPTY_PORT_ZERO,
-				RobotMap.DIOChannels.EMPTY_PORT_ONE);
+		armMotor = new TalonSRX(RobotMap.PWMChannels.ARM_MOTOR);
+		armSensor = new Encoder(RobotMap.DIOChannels.ARM_ENCODER_CHANNEL_A,
+				RobotMap.DIOChannels.ARM_ENCODER_CHANNEL_B);
 		// tells which port the talon is connecting to
 
 	}
@@ -42,7 +34,8 @@ public class ClawArm extends PIDSubsystem {
 
 		double angle = armSensor.get();
 
-		if (angle >= minimum || angle <= maximum) {
+		if (angle >= RobotMap.ArmConstants.MINIMUM
+				|| angle <= RobotMap.ArmConstants.MAXIMUM) {
 			armMotor.set(speed);
 			// if angle is less or equal to 90 OR if angle is greater or equal
 			// to 200, armMotor moves x speed
@@ -63,12 +56,12 @@ public class ClawArm extends PIDSubsystem {
 
 	protected double returnPIDInput() {
 
-		//SmartDashboard.putNumber("EncoderPosition", armSensor.get());
+		// SmartDashboard.putNumber("EncoderPosition", armSensor.get());
 		return armSensor.get();
 	}
 
 	protected void usePIDOutput(double output) {
-		//SmartDashboard.putNumber("MotorPower", output);
+		// SmartDashboard.putNumber("MotorPower", output);
 		armMotor.set(output);
 	}
 

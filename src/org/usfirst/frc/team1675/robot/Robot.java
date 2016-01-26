@@ -23,6 +23,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final ClawArm clawArm = new ClawArm();
+	
 	public static OI oi;
 
 	Command autonomousCommand;
