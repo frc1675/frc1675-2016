@@ -10,8 +10,8 @@ public class ClawCommandGroup extends CommandGroup {
     public  ClawCommandGroup() {
     	
     	addSequential(new ClawIntake());
-    	addParallel(new ClawIdle());;
-    	addSequential(new Wait());
+    	addSequential(new ClawIdle());;
+    	addSequential(new Wait(5));
     	addSequential(new ClawOutput());
     	addSequential(new ClawIdle());
 
