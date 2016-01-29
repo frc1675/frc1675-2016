@@ -37,13 +37,13 @@ public class ClawArm extends PIDSubsystem {
 		if (angle >= RobotMap.ArmConstants.MINIMUM
 				|| angle <= RobotMap.ArmConstants.MAXIMUM) {
 			armMotor.set(speed);
-			// if angle is less or equal to 90 OR if angle is greater or equal
+			// if the angle is less or equal to 90 OR if angle is greater or
+			// equal
 			// to 200, armMotor moves x speed
 
 		} else {
 			armMotor.set(0);
-			// if angle is greater or equal to 90 OR if angle is less or equal
-			// to 200, arm stops
+			// if not then the robot stops
 		}
 
 	}
