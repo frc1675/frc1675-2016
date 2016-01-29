@@ -1,77 +1,142 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.utils.DPadButton;
+import org.usfirst.frc.team1675.robot.utils.TriggerButton;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team1675.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1675.robot.commands.MoveWithController;
-import org.usfirst.frc.team1675.robot.commands.SetArmPosition;
-
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
 
-	public static final int OPERATOR_LEFT_Y_AXIS = 1;
-	public Joystick operatorstick;
-	public JoystickButton operatorButtonA;
-	public JoystickButton operatorButtonB;
+	private Joystick driverController = new Joystick(XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverYButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverXButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private DPadButton driverDPadRight = new DPadButton(driverController, DPadButton.Direction.RIGHT);
+	private DPadButton driverDPadLeft = new DPadButton(driverController, DPadButton.Direction.LEFT);
+	private DPadButton driverDPadUp = new DPadButton(driverController, DPadButton.Direction.UP);
+	private DPadButton driverDPadDown = new DPadButton(driverController, DPadButton.Direction.DOWN);
+	private JoystickButton driverRightBumper = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
 	
-	//home position
-	//scoring position
 
-	public OI() {
-		operatorstick = new Joystick(0);
-		operatorButtonB = new JoystickButton(operatorstick, XBoxControllerMap.A_BUTTON);
-		operatorButtonA = new JoystickButton(operatorstick, XBoxControllerMap.B_BUTTON);
+	private TriggerButton driverRightTrigger = new TriggerButton(driverController, true, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
+	private TriggerButton driverrLeftTrigger = new TriggerButton(driverController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
+
+	
+	
+	private Joystick operatorController = new Joystick(XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private DPadButton operatorDPadRight = new DPadButton(operatorController, DPadButton.Direction.RIGHT);
+	private DPadButton operatorDPadLeft = new DPadButton(operatorController, DPadButton.Direction.LEFT);
+	private DPadButton operatorDPadUp = new DPadButton(operatorController, DPadButton.Direction.UP);
+	private DPadButton operatorDPadDown = new DPadButton(operatorController, DPadButton.Direction.DOWN);
+	private JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+
+	private TriggerButton operatorRightTrigger = new TriggerButton(operatorController, true, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
+	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
+
+	public OI(){
 		
-		operatorButtonA.whenPressed(new SetArmPosition(RobotMap.ArmConstants.HOME_POSITION));//Home Position of Arm
-		operatorButtonB.whenPressed(new SetArmPosition(RobotMap.ArmConstants.SCORE_POSITION));//Scoring Position of Arm.
-	}
-
-	public double getRawLeftYAxis() {
-
-		double leftYAxisValue = operatorstick.getRawAxis(OPERATOR_LEFT_Y_AXIS);
-		leftYAxisValue = checkForDeadzone(leftYAxisValue);
-		return leftYAxisValue;
+		
 
 	}
+	
+	
+	
+	public double getDriverLeftXAxis() {
+		double leftXControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+		return checkForDeadzone(leftXControllerValue);
 
-	// // CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
+	}
+	
+	public double getDriverLeftXAxisWODeadzone(){
+		double leftXControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+		return leftXControllerValue;
+	}
+	public double getDriverLeftYAxis() {
+		double leftYControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+		return checkForDeadzone(leftYControllerValue);
+	}
+	
+	public double getDriverLeftYAxisWODeadzone() {
+		double leftYControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+		return leftYControllerValue;
+	}
+	public double getDriverRightXAxis() {
+		double rightXControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+		return checkForDeadzone(rightXControllerValue);
+	}
+	
+	public double getDriverRightXAxisWODeadzone() {
+		double rightXControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+		return rightXControllerValue;
+	}
+	
+	public double getDriverRightYAxis() {
+		double rightYControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+		return checkForDeadzone(rightYControllerValue);
+	}
+	
+	public double getDriverRightYAxisWODeadzone() {
+		double rightYControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+		return rightYControllerValue;
+	}
+	
 
-	private double checkForDeadzone(double leftYAxisValue) {
-		if (leftYAxisValue < 0.1675) {
-			return 0;
+	public double getDriverLeftTrigger(double scaleValue){
+		double leftTriggerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_TRIGGER_AXIS);
+		leftTriggerValue = checkForDeadzone(leftTriggerValue);
+		return (-leftTriggerValue * scaleValue);
+	}
+
+
+	public double getDriverRightTrigger(double scaleValue){
+		double rightTriggerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_TRIGGER_AXIS);
+		rightTriggerValue = checkForDeadzone(rightTriggerValue);
+		return (rightTriggerValue * scaleValue);
+	}
+	
+	public double getOperatorLeftYAxis(double scaleValue){
+		double leftYControllerValue = operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+		leftYControllerValue = checkForDeadzone(leftYControllerValue);
+		return (leftYControllerValue * scaleValue);
+	}
+	public double getOperatorLeftXAxis(double scaleValue){
+		double leftXControllerValue = operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+		leftXControllerValue = checkForDeadzone(leftXControllerValue);
+		return (leftXControllerValue * scaleValue);
+	}
+	
+	public double getOperatorRightYAxis(double scaleValue){
+		double rightYControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+		return checkForDeadzone(rightYControllerValue * scaleValue);
+	}
+	
+	public double getOperatorRightXAxis(double scaleValue){
+		double rightXControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+		return checkForDeadzone(rightXControllerValue * scaleValue);
+	}
+	
+	public double checkForDeadzone(double input) {
+		if (Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE) {
+			return 0.0;
 		} else {
-			return leftYAxisValue;
+			return deadzone( input);
 		}
 	}
 
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
+	public double deadzone(double input){
+		if(Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE){
+			return 0;		
+		}
+		return input;
+	}
 
-	// // TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
 
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-};
+}

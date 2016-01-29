@@ -1,12 +1,9 @@
 package org.usfirst.frc.team1675.robot.commands;
 
-import org.usfirst.frc.team1675.robot.Robot;
+import org.usfirst.frc.team1675.robot.Robot; 
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class MoveWithController extends Command {
 
 	public MoveWithController() {
@@ -21,7 +18,7 @@ public class MoveWithController extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double motorPower = Robot.oi.getRawLeftYAxis();
+		double motorPower = Robot.oi.getDriverLeftYAxis();
 		Robot.clawArm.moveArm(motorPower);
 	}
 
