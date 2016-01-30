@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.commands.ClawIdle;
+import org.usfirst.frc.team1675.robot.commands.ClawIntake;
+import org.usfirst.frc.team1675.robot.commands.ClawOutput;
+import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
@@ -42,6 +46,12 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
+		
+		
+		driverAButton.whenPressed(new ClawIntake());
+		driverAButton.whenReleased(new ClawIdle());
+		driverXButton.whileHeld(new ClawOutput());
+		driverXButton.whenReleased(new ClawIdle());
 		
 		
 
