@@ -3,11 +3,11 @@ package org.usfirst.frc.team1675.robot.subsystems;
 import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.CheeseDrive;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,29 +17,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveBase extends Subsystem {
     
 	private SpeedController leftFront;
-	private SpeedController leftMid;
+	private CANTalon leftMid;
 	private SpeedController leftBack;
 	private SpeedController rightFront;
-	private SpeedController rightMid;
+	private CANTalon rightMid;
 	private SpeedController rightBack;
-	
-	private Encoder leftEncoder;
-	private Encoder rightEncoder; 
 	
 	private Gyro gyro;
 	
 	public DriveBase(){
-		leftFront = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		leftMid = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		leftBack = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		rightFront = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		rightMid = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		rightBack = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		leftFront = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		leftMid = new CANTalon(RobotMap.CANDeviceIDs.LEFT_MOTOR);
+		leftBack = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_ONE);
+		rightFront = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_TWO);
+		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
+		rightBack = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_THREE);
 		
-		leftEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		rightEncoder = new Encoder(RobotMap.PMWChannels.EMPTY_PORT_ZERO, RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		
-		gyro = new AnalogGyro(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		gyro = new AnalogGyro(RobotMap.AnalogInChannels.EMPTY_PORT_ZERO);
 	}
 		
 	

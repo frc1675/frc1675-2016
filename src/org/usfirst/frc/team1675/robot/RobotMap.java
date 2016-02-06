@@ -16,6 +16,11 @@ public class RobotMap {
 		public static final int EMPTY_PORT_NINE = 9;
 
 	}
+	public static class CANDeviceIDs{
+		public static final int LEFT_MOTOR = 1;
+		public static final int RIGHT_MOTOR = 2;
+		
+	}
 
 	public static class PDChannels {
 		public static final int EMPTY_PORT_ZERO = 0;
