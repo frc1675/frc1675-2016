@@ -37,6 +37,6 @@ public class SetArmPosition extends Command {
 	}
 
 	protected void interrupted() {
-		Robot.clawArm.stopAndDisable();
+		this.end();
 	}
 }

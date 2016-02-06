@@ -2,40 +2,34 @@ package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.MoveWithController;
-import org.usfirst.frc.team1675.robot.commands.SetArmPosition;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.TalonSRX;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class ClawArm extends PIDSubsystem {
+public class ClawArm extends Subsystem {
 
-	private SpeedController armMotor;
+	private CANTalon armMotor;
 	// Visibility (private) Type (SpeedController) Name (armMotor)
-	private Encoder armSensor;
 
 	public ClawArm() {
-		super(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
-				RobotMap.ArmConstants.D);
-
-		armMotor = new TalonSRX(RobotMap.PWMChannels.ARM_MOTOR);
-		armSensor = new Encoder(RobotMap.DIOChannels.ARM_ENCODER_CHANNEL_A,
-				RobotMap.DIOChannels.ARM_ENCODER_CHANNEL_B);
-		// tells which port the talon is connecting to
+		armMotor = new CANTalon(RobotMap.CANBusID.CLAW_ARM_MOTOR);
+		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I, RobotMap.ArmConstants.D);
 
 	}
 
 	public void moveArm(double speed) {
 
-		double angle = armSensor.get();
+		double angle = armMotor.getPosition();
+		
+		armMotor.changeControlMode(TalonControlMode.PercentVbus);
 
-		if (angle >= RobotMap.ArmConstants.MINIMUM
-				|| angle <= RobotMap.ArmConstants.MAXIMUM) {
+		if (angle >= RobotMap.ArmConstants.MINIMUM || angle <= RobotMap.ArmConstants.MAXIMUM) {
 			armMotor.set(speed);
 			// if the angle is less or equal to 90 OR if angle is greater or
 			// equal
@@ -49,20 +43,10 @@ public class ClawArm extends PIDSubsystem {
 	}
 
 	public void setPosition(double position) {
-		this.setSetpoint(position);
-		this.enable();
 
-	}
+		armMotor.changeControlMode(TalonControlMode.Position);
+		armMotor.set(position);
 
-	protected double returnPIDInput() {
-
-		// SmartDashboard.putNumber("EncoderPosition", armSensor.get());
-		return armSensor.get();
-	}
-
-	protected void usePIDOutput(double output) {
-		// SmartDashboard.putNumber("MotorPower", output);
-		armMotor.set(output);
 	}
 
 	public void initDefaultCommand() {
@@ -72,8 +56,8 @@ public class ClawArm extends PIDSubsystem {
 	}
 
 	public void stopAndDisable() {
-
-		this.disable();
+		
+		armMotor.changeControlMode(TalonControlMode.PercentVbus); //change mode to manual 
 		armMotor.set(0);
 	}
 }
