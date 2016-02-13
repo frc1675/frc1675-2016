@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.commands.MoveLiftArmToHome;
+import org.usfirst.frc.team1675.robot.commands.MoveLiftArmToDown;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
@@ -42,7 +44,8 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
-		
+		operatorAButton.whenPressed(new MoveLiftArmToHome());
+		operatorBButton.whenPressed(new MoveLiftArmToDown());
 		
 
 	}
