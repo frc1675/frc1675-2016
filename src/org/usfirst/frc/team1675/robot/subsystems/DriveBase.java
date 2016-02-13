@@ -2,6 +2,7 @@ package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.CheeseDrive;
+import org.usfirst.frc.team1675.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -26,17 +27,16 @@ public class DriveBase extends Subsystem {
 	private Gyro gyro;
 	
 	public DriveBase(){
-		leftFront = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
+		leftFront = new VictorSP(RobotMap.PMWChannels.LEFT_FRONT_MOTOR);
 		leftMid = new CANTalon(RobotMap.CANDeviceIDs.LEFT_MOTOR);
-		leftBack = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_ONE);
-		rightFront = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_TWO);
+		leftBack = new VictorSP(RobotMap.PMWChannels.LEFT_BACK_MOTOR);
+		rightFront = new VictorSP(RobotMap.PMWChannels.RIGHT_FRONT_MOTOR);
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
-		rightBack = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_THREE);
+		rightBack = new VictorSP(RobotMap.PMWChannels.RIGHT_BACK_MOTOR);
 		
 		gyro = new AnalogGyro(RobotMap.AnalogInChannels.EMPTY_PORT_ZERO);
 	}
 		
-	
 	//sets all of the motor powers on the left side
 	public void setLeftMotorPower(double speed){
 		setLeftFrontMotorPower(speed);
@@ -47,9 +47,9 @@ public class DriveBase extends Subsystem {
 	
 	//sets all of the motor powers on the right side
 	public void setRightMotorPower(double speed){
-		setRightFrontMotorPower(speed);
-		setRightMidMotorPower(speed);
-		setRightBackMotorPower(speed);
+		setRightFrontMotorPower(-speed);
+		setRightMidMotorPower(-speed);
+		setRightBackMotorPower(-speed);
 	}
 	
 	/**
@@ -69,21 +69,21 @@ public class DriveBase extends Subsystem {
 	}
 	
 	public void setRightFrontMotorPower(double speed){
-		rightFront.set(speed);
+		rightFront.set(-speed);
 	}
 	
 	public void setRightMidMotorPower(double speed){
-		rightMid.set(speed);
+		rightMid.set(-speed);
 	}
 	
 	public void setRightBackMotorPower(double speed){
-		rightBack.set(speed);
+		rightBack.set(-speed);
 	}
 	
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new CheeseDrive());
+        setDefaultCommand(new TankDrive());
     }
 }
 
