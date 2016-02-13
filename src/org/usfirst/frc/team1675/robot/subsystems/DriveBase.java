@@ -47,9 +47,9 @@ public class DriveBase extends Subsystem {
 	
 	//sets all of the motor powers on the right side
 	public void setRightMotorPower(double speed){
-		setRightFrontMotorPower(-speed);
-		setRightMidMotorPower(-speed);
-		setRightBackMotorPower(-speed);
+		setRightFrontMotorPower(speed);
+		setRightMidMotorPower(speed);
+		setRightBackMotorPower(speed);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class DriveBase extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new CheeseDrive());
     }
 }
 

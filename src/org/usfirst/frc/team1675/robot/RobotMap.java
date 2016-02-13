@@ -58,4 +58,9 @@ public class RobotMap {
 		public static final int EMPTY_PORT_THREE = 3;
 	}
 
+	public static class DriverConstants{
+		 public static final double DEAD_ZONE_TOLERANCE = .1675;
+		 public static final double TRIGGER_DEAD_ZONE = .5;
+	}
+
 }

@@ -21,8 +21,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double rightPower = Robot.oi.getRightYAxis();
-    	double leftPower = Robot.oi.getLeftYAxis();
+    	double rightPower = Robot.oi.getDriverRightYAxis();
+    	double leftPower = Robot.oi.getDriverLeftYAxis();
     	
     	Robot.driveBase.setLeftMotorPower(leftPower);
     	Robot.driveBase.setRightMotorPower(rightPower);

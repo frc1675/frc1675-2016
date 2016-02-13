@@ -1,9 +1,14 @@
 package org.usfirst.frc.team1675.robot;
 
+
+
 public class XBoxControllerMap {
 	
-	public static final int DRIVER_CONTROLLER_PORT = 1;
-	
+
+
+	public static final int driverControllerPort = 0;
+	public static final int operatorControllerPort = 1;
+
 	// left analog stick
 	public static final int LEFT_X_AXIS = 0;
 	public static final int LEFT_Y_AXIS = 1;
