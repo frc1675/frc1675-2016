@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
 
+
 	private Joystick driverController = new Joystick(XBoxControllerMap.driverControllerPort);
 	private JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
 	private JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
@@ -22,7 +23,7 @@ public class OI {
 	
 
 	private TriggerButton driverRightTrigger = new TriggerButton(driverController, true, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
-	private TriggerButton driverrLeftTrigger = new TriggerButton(driverController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
+	private TriggerButton driverLeftTrigger = new TriggerButton(driverController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	
 	
@@ -61,12 +62,12 @@ public class OI {
 	}
 	public double getDriverLeftYAxis() {
 		double leftYControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-		return checkForDeadzone(leftYControllerValue);
+		return -checkForDeadzone(leftYControllerValue);
 	}
 	
 	public double getDriverLeftYAxisWODeadzone() {
 		double leftYControllerValue = driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-		return leftYControllerValue;
+		return -leftYControllerValue;
 	}
 	public double getDriverRightXAxis() {
 		double rightXControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
@@ -80,12 +81,12 @@ public class OI {
 	
 	public double getDriverRightYAxis() {
 		double rightYControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return checkForDeadzone(rightYControllerValue);
+		return -checkForDeadzone(rightYControllerValue);
 	}
 	
 	public double getDriverRightYAxisWODeadzone() {
 		double rightYControllerValue = driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return rightYControllerValue;
+		return -rightYControllerValue;
 	}
 	
 
@@ -105,7 +106,7 @@ public class OI {
 	public double getOperatorLeftYAxis(double scaleValue){
 		double leftYControllerValue = operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
 		leftYControllerValue = checkForDeadzone(leftYControllerValue);
-		return (leftYControllerValue * scaleValue);
+		return -(leftYControllerValue * scaleValue);
 	}
 	public double getOperatorLeftXAxis(double scaleValue){
 		double leftXControllerValue = operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
@@ -115,7 +116,7 @@ public class OI {
 	
 	public double getOperatorRightYAxis(double scaleValue){
 		double rightYControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return checkForDeadzone(rightYControllerValue * scaleValue);
+		return -checkForDeadzone(rightYControllerValue * scaleValue);
 	}
 	
 	public double getOperatorRightXAxis(double scaleValue){
