@@ -26,7 +26,7 @@ public class MoveLiftArmManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double motorPower = Robot.oi.getOperatorRightYAxis(1);
+    	double motorPower = Robot.oi.getOperatorRightYAxis(0.25);
     	
     	Robot.liftArm.moveArm(motorPower);
     	

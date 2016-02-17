@@ -20,7 +20,7 @@ public class LiftArm extends Subsystem {
 
 	public LiftArm(){
 		armMotor = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		upLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_ZERO);
+		upLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_FOUR);
 		downLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_ZERO); 
 	}
 	

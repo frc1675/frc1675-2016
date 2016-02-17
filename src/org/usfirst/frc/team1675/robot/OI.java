@@ -37,6 +37,7 @@ public class OI {
 	private DPadButton operatorDPadLeft = new DPadButton(operatorController, DPadButton.Direction.LEFT);
 	private DPadButton operatorDPadUp = new DPadButton(operatorController, DPadButton.Direction.UP);
 	private DPadButton operatorDPadDown = new DPadButton(operatorController, DPadButton.Direction.DOWN);
+	
 	private JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
 	private JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
 
@@ -118,7 +119,9 @@ public class OI {
 	
 	public double getOperatorRightYAxis(double scaleValue){
 		double rightYControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return checkForDeadzone(rightYControllerValue * scaleValue);
+		double deadzonedValue = checkForDeadzone(rightYControllerValue);
+		double scaledDeadzonedValue = deadzonedValue*scaleValue;
+		return scaledDeadzonedValue;
 	}
 	
 	public double getOperatorRightXAxis(double scaleValue){
