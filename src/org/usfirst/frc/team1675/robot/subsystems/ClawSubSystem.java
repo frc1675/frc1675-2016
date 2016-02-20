@@ -5,6 +5,7 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,8 +20,8 @@ public class ClawSubSystem extends Subsystem {
 	private SpeedController rollerBottom;
 
 	public ClawSubSystem() {
-		rollerTop = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ZERO);
-		rollerBottom = new TalonSRX(RobotMap.PMWChannels.EMPTY_PORT_ONE);
+		rollerTop = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_SEVEN);
+		rollerBottom = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_EIGHT);
 	}
 
 	public void setRollerInPower(double value) {
@@ -40,7 +41,7 @@ public class ClawSubSystem extends Subsystem {
 //									// map
 //			return true;
 //		} else
-			return false;
+		return false;
 	}
 
 	public void initDefaultCommand() {

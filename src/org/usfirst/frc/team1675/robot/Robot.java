@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;
-    public static ClawSubSystem clawSub;
+    public static ClawSubSystem clawSub = new ClawSubSystem();
 
     /**
      * This function is run when the robot is first started up and should be
