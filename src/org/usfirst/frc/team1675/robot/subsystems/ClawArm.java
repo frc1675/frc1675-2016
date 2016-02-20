@@ -53,7 +53,12 @@ public class ClawArm extends Subsystem {
 		setDefaultCommand(new MoveWithController());
 
 	}
-
+	
+	public double getPosition(){
+		return armMotor.getPosition();
+	
+	
+}
 	public void stopAndDisable() {
 
 		armMotor.changeControlMode(TalonControlMode.PercentVbus); // change mode
