@@ -21,6 +21,9 @@ public class MoveWithController extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double motorPower = Robot.oi.getOperatorLeftYAxis(RobotMap.ArmConstants.SCALING_VALUE);
+		
+		System.out.println("Motor power from controller: " + motorPower);
+		
 //		Robot.clawArm.moveArm(motorPower);
 		Robot.clawArm.moveWithoutEncoder(motorPower);
 //		SmartDashboard.putNumber("Encoder Position of Arm", Robot.clawArm.getPosition());
