@@ -22,6 +22,7 @@ public class ClawArm extends Subsystem {
 		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
+		armMotor.changeControlMode(TalonControlMode.PercentVbus);
 
 	}
 
@@ -47,6 +48,12 @@ public class ClawArm extends Subsystem {
 		armMotor.set(position);
 
 	}
+	
+	public void moveWithoutEncoder(double power){
+		byte b = 2;
+		armMotor.set(power, b);
+	}
+	
 
 	public void initDefaultCommand() {
 
