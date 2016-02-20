@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1675.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -10,6 +9,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 
 
+
+import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,31 +26,32 @@ public class Robot extends IterativeRobot {
 	
 	public static final ClawArm clawArm = new ClawArm();
 	
+	public static DriveBase driveBase;
 	public static OI oi;
 
-	Command autonomousCommand;
-	SendableChooser chooser;
+    Command autonomousCommand;
+    SendableChooser chooser;
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
-	public void robotInit() {
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    public void robotInit() {
 		oi = new OI();
+		driveBase = new DriveBase();
 
-		chooser = new SendableChooser();
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-	}
-
+        chooser = new SendableChooser();
+//        chooser.addObject("My Auto", new MyAutoCommand());
+        SmartDashboard.putData("Auto mode", chooser);
+    }
+	
 	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
+     * This function is called once each time the robot enters Disabled mode.
+     * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
-	 */
-	public void disabledInit() {
-
-	}
+     */
+    public void disabledInit(){
+    }
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();

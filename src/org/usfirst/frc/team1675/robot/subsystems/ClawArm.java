@@ -18,7 +18,7 @@ public class ClawArm extends Subsystem {
 	// Visibility (private) Type (SpeedController) Name (armMotor)
 
 	public ClawArm() {
-		armMotor = new CANTalon(RobotMap.CANBusID.CLAW_ARM_MOTOR);
+		armMotor = new CANTalon(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
 		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
