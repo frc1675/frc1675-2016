@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1675.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -6,6 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
+import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 
@@ -20,11 +21,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
-	public static LiftArm liftArm;	
+
+	public static DriveBase driveBase;
+	public static LiftArm liftArm;
 	
 	static{
 		try{
+			driveBase = new DriveBase();
 			liftArm = new LiftArm();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -33,9 +36,10 @@ public class Robot extends IterativeRobot {
 	
 	public static OI oi;
 
-	
-
     Command autonomousCommand;
+    
+    
+    
     SendableChooser chooser;
 
     /**
@@ -43,9 +47,8 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
+		oi = new OI();		
         chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -73,7 +76,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        //autonomousCommand = (Command) chooser.getSelected();
+    	//autonomousCommand = new TurnWithGyro(90.0);
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -119,3 +123,4 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
 }
+

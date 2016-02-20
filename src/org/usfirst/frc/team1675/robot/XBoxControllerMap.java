@@ -4,8 +4,11 @@ package org.usfirst.frc.team1675.robot;
 
 public class XBoxControllerMap {
 	
+
+
 	public static final int driverControllerPort = 0;
 	public static final int operatorControllerPort = 1;
+
 	// left analog stick
 	public static final int LEFT_X_AXIS = 0;
 	public static final int LEFT_Y_AXIS = 1;
@@ -42,5 +45,8 @@ public class XBoxControllerMap {
 	// Joystick buttons (clicking them in)
 	public static final int LEFT_JOYSTICK_BUTTON = 9;
 	public static final int RIGHT_JOYSTICK_BUTTON = 10;
+
+	public static final double DEAD_ZONE = .1675;
+	
 
 }
