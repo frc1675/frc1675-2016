@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1675.robot.commands;
+package org.usfirst.frc.team1675.robot.commands.drivebase;
+
+import org.usfirst.frc.team1675.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -6,43 +8,49 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Wait extends Command {
+public class DriveStraightForTime extends Command {
+	
 	private double waitTime;
 	private Timer waitTimer;
-	
-	
-    public Wait(double waitTime) {
+	private double power;
+
+    public DriveStraightForTime(double power, double waitTime) {
+    	System.out.println("start drive straight");
+    	requires(Robot.driveBase);
+    	
     	this.waitTime = waitTime;
     	waitTimer = new Timer();
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	
+    	this.power = power;
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("start wait");
-
     	waitTimer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("sending motor power");
+    	Robot.driveBase.setLeftMotorPower(power);
+    	Robot.driveBase.setRightMotorPower(power);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (waitTimer.get() < waitTime){
-        	return false;
-        }
-        else{ 
-        	return true;
-       
-        }
+    	if(waitTimer.get() < waitTime){
+    		return false;
+    	}else{
+    		return true;
+    	}
         
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.setLeftMotorPower(0);
+    	Robot.driveBase.setRightMotorPower(0);
     	waitTimer.stop();
     	waitTimer.reset();
     }

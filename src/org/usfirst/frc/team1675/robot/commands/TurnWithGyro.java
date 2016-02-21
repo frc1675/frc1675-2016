@@ -15,9 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnWithGyro extends PIDCommand {
 
 	
-	private static final double kP = 0.015;
+	private static final double kP = 0.012;
 	private static final double kI = 0;
 	private static final double kD = 0;
+	
+	private static final double TOLERANCE = 5.0;
 	
 	double degreesSetpoint;
 	
@@ -47,11 +49,21 @@ public class TurnWithGyro extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return this.getPIDController().onTarget();
+    	System.out.println("error: " + this.getPIDController().getError());
+    	System.out.println("on target? " + this.getPIDController().onTarget());
+    	
+    	boolean returnVal = false;
+    	
+    	if(Math.abs(this.getPIDController().getError()) < TOLERANCE){
+    		returnVal = true;
+    	}
+    	
+        return returnVal;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	this.getPIDController().disable();
     	Robot.driveBase.setLeftMotorPower(0.0);
 		Robot.driveBase.setRightMotorPower(0.0);
     }

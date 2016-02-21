@@ -46,6 +46,7 @@ public class DriveBase extends Subsystem {
 		
 	//sets all of the motor powers on the left side
 	public void setLeftMotorPower(double speed){
+		System.out.println("left go " + speed);
 		setLeftFrontMotorPower(speed);
 		setLeftMidMotorPower(speed);
 		setLeftBackMotorPower(speed);
