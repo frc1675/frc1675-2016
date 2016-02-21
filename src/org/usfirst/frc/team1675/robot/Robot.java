@@ -21,13 +21,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static DriveBase driveBase = new DriveBase();;
-	public static ClawSubSystem clawSub = new ClawSubSystem();
+	public static DriveBase driveBase;
+	public static ClawSubSystem clawSub;
+		
+	static{
+		try{
+			driveBase = new DriveBase();
+			clawSub = new ClawSubSystem();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public static OI oi;
 
     Command autonomousCommand;
-    SendableChooser chooser;
-    
+    SendableChooser chooser;   
 
     /**
      * This function is run when the robot is first started up and should be
