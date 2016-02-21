@@ -1,18 +1,19 @@
-package org.usfirst.frc.team1675.robot.commands;
+package org.usfirst.frc.team1675.robot.commands.claw;
 
 import org.usfirst.frc.team1675.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ClawIntakeForTime extends Command {
-
+public class ClawOutputForTime extends Command {
+	
 	private double waitTime;
 	private Timer waitTimer;
+	
 
-	public ClawIntakeForTime(double waitTime) {
+	public ClawOutputForTime(double waitTime) {
 		requires(Robot.clawSub);
-
+		
 		this.waitTime = waitTime;
 		waitTimer = new Timer();
 	}
@@ -24,12 +25,12 @@ public class ClawIntakeForTime extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.clawSub.setRollerInPower(1);
+		Robot.clawSub.setRollerOutPower(-1); 
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-
+		
 		if (waitTimer.get() < waitTime) {
 			return false;
 		} else {
@@ -39,7 +40,7 @@ public class ClawIntakeForTime extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.clawSub.setRollerInPower(0);
+		Robot.clawSub.setRollerOutPower(0);
 		waitTimer.stop();
 		waitTimer.reset();
 	}

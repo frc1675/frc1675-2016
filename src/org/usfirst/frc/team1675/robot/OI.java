@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1675.robot;
 
-import org.usfirst.frc.team1675.robot.commands.ClawIdle;
-import org.usfirst.frc.team1675.robot.commands.ClawIntake;
-import org.usfirst.frc.team1675.robot.commands.ClawOutput;
 import org.usfirst.frc.team1675.robot.commands.Wait;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawOutput;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
