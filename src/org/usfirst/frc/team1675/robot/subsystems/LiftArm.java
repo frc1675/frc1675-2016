@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
-import org.usfirst.frc.team1675.robot.commands.MoveLiftArmManual;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmManual;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;

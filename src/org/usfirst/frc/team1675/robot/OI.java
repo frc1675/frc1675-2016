@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1675.robot;
 
-import org.usfirst.frc.team1675.robot.commands.MoveLiftArmToHome;
-import org.usfirst.frc.team1675.robot.commands.MoveLiftArmToDown;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 

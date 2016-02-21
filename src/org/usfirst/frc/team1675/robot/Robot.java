@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
-import org.usfirst.frc.team1675.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
