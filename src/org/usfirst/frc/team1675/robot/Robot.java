@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-
+import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
+import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -78,20 +79,26 @@ public class Robot extends IterativeRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
-	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
+	  public void autonomousInit() {
+        //autonomousCommand = (Command) chooser.getSelected();
+    	//autonomousCommand = new TurnWithGyro(90.0);
+    	autonomousCommand = new LowBarScore();
+        
+		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		switch(autoSelected) {
+		case "My Auto":
+			autonomousCommand = new MyAutoCommand();
+			break;
+		case "Default Auto":
+		default:
+			autonomousCommand = new ExampleCommand();
+			break;
+		} */
+    	System.out.println("start auto");
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
-	}
+    	// schedule the autonomous command (example)
+        if (autonomousCommand != null) autonomousCommand.start();
+    }
 
 	// if command is something (if command is not nothing)
 
