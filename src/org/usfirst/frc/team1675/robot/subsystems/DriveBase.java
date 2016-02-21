@@ -27,12 +27,12 @@ public class DriveBase extends Subsystem {
 	private Gyro gyro;
 	
 	public DriveBase(){
-		leftFront = new VictorSP(RobotMap.PMWChannels.LEFT_FRONT_MOTOR);
+		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
 		leftMid = new CANTalon(RobotMap.CANDeviceIDs.LEFT_MOTOR);
-		leftBack = new VictorSP(RobotMap.PMWChannels.LEFT_BACK_MOTOR);
-		rightFront = new VictorSP(RobotMap.PMWChannels.RIGHT_FRONT_MOTOR);
+		leftBack = new VictorSP(RobotMap.PWMChannels.LEFT_BACK_MOTOR);
+		rightFront = new VictorSP(RobotMap.PWMChannels.RIGHT_FRONT_MOTOR);
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
-		rightBack = new VictorSP(RobotMap.PMWChannels.RIGHT_BACK_MOTOR);
+		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 		
 		gyro = new AnalogGyro(RobotMap.AnalogInChannels.EMPTY_PORT_ZERO);
 	}

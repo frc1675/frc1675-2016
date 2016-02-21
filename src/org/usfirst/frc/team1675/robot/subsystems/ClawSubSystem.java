@@ -20,8 +20,8 @@ public class ClawSubSystem extends Subsystem {
 	private SpeedController rollerBottom;
 
 	public ClawSubSystem() {
-		rollerTop = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_SEVEN);
-		rollerBottom = new VictorSP(RobotMap.PMWChannels.EMPTY_PORT_EIGHT);
+		rollerTop = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_SEVEN);
+		rollerBottom = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_EIGHT);
 	}
 
 	public void setRollerInPower(double value) {

@@ -3,7 +3,7 @@ package org.usfirst.frc.team1675.robot;
 public class RobotMap {
 
 
-	public static class PMWChannels {
+	public static class PWMChannels {
 		public static final int EMPTY_PORT_ZERO = 0;
 		public static final int RIGHT_BACK_MOTOR = 1;
 		public static final int RIGHT_FRONT_MOTOR = 2;		
