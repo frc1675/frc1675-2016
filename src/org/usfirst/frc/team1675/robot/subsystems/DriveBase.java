@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
@@ -83,7 +84,7 @@ public class DriveBase extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new CheeseDrive());
+        setDefaultCommand(new TankDrive());
     }
 }
 
