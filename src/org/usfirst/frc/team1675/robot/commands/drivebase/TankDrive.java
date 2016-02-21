@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1675.robot.commands;
+package org.usfirst.frc.team1675.robot.commands.drivebase;
 
 import org.usfirst.frc.team1675.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CheeseDrive extends Command {
+public class TankDrive extends Command {
 
-    public CheeseDrive() {
+    public TankDrive() {
     	
         requires(Robot.driveBase);
     }
@@ -21,11 +21,8 @@ public class CheeseDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double turnPower = Robot.oi.getDriverRightXAxis();
-    	double forwardPower = Robot.oi.getDriverLeftYAxis();
-    	
-    	double rightPower = forwardPower - turnPower;
-    	double leftPower = forwardPower + turnPower;
+    	double rightPower = Robot.oi.getDriverRightYAxis();
+    	double leftPower = Robot.oi.getDriverLeftYAxis();
     	
     	Robot.driveBase.setLeftMotorPower(leftPower);
     	Robot.driveBase.setRightMotorPower(rightPower);
