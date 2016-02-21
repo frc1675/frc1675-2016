@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -31,7 +32,9 @@ public class LiftArm extends Subsystem {
 		return downLimitSwitch.get();
 	}
 
-	public void moveArm(double power) {
+	public void moveArm(double power) { 
+		SmartDashboard.putBoolean("Top Limit Switch", getLimitValueUp());
+		SmartDashboard.putBoolean("Bottom Limit Switch", getLimitValueDown());
 		if (getLimitValueUp() == true || getLimitValueDown() == true) {
 			armMotor.set(0);
 

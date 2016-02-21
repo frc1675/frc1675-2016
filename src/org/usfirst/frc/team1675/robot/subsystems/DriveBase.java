@@ -4,7 +4,6 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,7 +30,7 @@ public class DriveBase extends Subsystem {
 	private CANTalon rightMid;
 	private SpeedController rightBack;
 	
-	private AHRS ahrs;
+
 	
 	public DriveBase(){
 		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
@@ -41,7 +40,7 @@ public class DriveBase extends Subsystem {
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
 		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 		
-		ahrs = new AHRS(SerialPort.Port.kMXP);
+		
 	}
 		
 	//sets all of the motor powers on the left side
@@ -89,14 +88,6 @@ public class DriveBase extends Subsystem {
 	public void setTalonsToVoltageMode(){
 		leftMid.changeControlMode(TalonControlMode.PercentVbus);
 		rightMid.changeControlMode(TalonControlMode.PercentVbus);
-	}
-	
-	public double getAngle(){
-		return ahrs.getAngle();
-	}
-	
-	public void resetGyro(){
-		ahrs.reset();
 	}
 	
     public void initDefaultCommand() {

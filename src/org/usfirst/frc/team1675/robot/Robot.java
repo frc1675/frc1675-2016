@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
