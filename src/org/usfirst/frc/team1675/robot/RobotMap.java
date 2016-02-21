@@ -27,7 +27,6 @@ public class RobotMap {
 		public static final int EMPTY_PORT_ONE = 1;
 		public static final int EMPTY_PORT_TWO = 2;
 		public static final int EMPTY_PORT_THREE = 3;
-
 	}
 
 	public static class DIOChannels {

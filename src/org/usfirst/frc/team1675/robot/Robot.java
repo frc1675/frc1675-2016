@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
-
-
-
+import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,11 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	
-	public static final ClawArm clawArm = new ClawArm();
-	
-	public static DriveBase driveBase;
+	public static DriveBase driveBase = new DriveBase();;
+	public static ClawSubSystem clawSub = new ClawSubSystem();
+	public static final ClawArm clawArm = new ClawArm();		
 	public static OI oi;
 
     Command autonomousCommand;
@@ -37,8 +34,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-		driveBase = new DriveBase();
+		oi = new OI();		
 
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());

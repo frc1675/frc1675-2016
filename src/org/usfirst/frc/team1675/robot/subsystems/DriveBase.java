@@ -2,8 +2,8 @@
 package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
-import org.usfirst.frc.team1675.robot.commands.CheeseDrive;
-import org.usfirst.frc.team1675.robot.commands.TankDrive;
+import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
