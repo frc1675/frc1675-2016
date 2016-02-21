@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
+import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,9 +22,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveBase driveBase = new DriveBase();;
-	public static ClawSubSystem clawSub = new ClawSubSystem();
-	public static final ClawArm clawArm = new ClawArm();		
+	public static DriveBase driveBase;
+	public static ClawSubSystem clawSub;
+	public static ClawArm clawArm;
+	public static LiftArm liftArm;	
+	
+	static{
+		try{
+			driveBase = new DriveBase();
+			clawSub = new ClawSubSystem();
+			clawArm = new ClawArm();
+			liftArm = new LiftArm();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+		
 	public static OI oi;
 
     Command autonomousCommand;
@@ -35,7 +50,6 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();		
-
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);

@@ -5,11 +5,17 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
+
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -25,7 +31,7 @@ public class DriveBase extends Subsystem {
 	private CANTalon rightMid;
 	private SpeedController rightBack;
 	
-	private Gyro gyro;
+
 	
 	public DriveBase(){
 		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
@@ -35,7 +41,7 @@ public class DriveBase extends Subsystem {
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
 		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 		
-		gyro = new AnalogGyro(RobotMap.AnalogInChannels.EMPTY_PORT_ZERO);
+		
 	}
 		
 	//sets all of the motor powers on the left side
@@ -43,7 +49,6 @@ public class DriveBase extends Subsystem {
 		setLeftFrontMotorPower(speed);
 		setLeftMidMotorPower(speed);
 		setLeftBackMotorPower(speed);
-		
 	}
 	
 	//sets all of the motor powers on the right side
@@ -81,6 +86,10 @@ public class DriveBase extends Subsystem {
 		rightBack.set(-speed);
 	}
 	
+	public void setTalonsToVoltageMode(){
+		leftMid.changeControlMode(TalonControlMode.PercentVbus);
+		rightMid.changeControlMode(TalonControlMode.PercentVbus);
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

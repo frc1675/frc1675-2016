@@ -75,5 +75,10 @@ public class RobotMap {
 		public static final double DEAD_ZONE_TOLERANCE = .1675;
 		public static final double TRIGGER_DEAD_ZONE = .5;
 	}
+	
+	public static class LiftArmConstants{
+		public static final double LIFT_ARM_UP_SPEED = 0.5;
+		public static final double LIFT_ARM_DOWN_SPEED = -0.5;
+	}
 
 }
