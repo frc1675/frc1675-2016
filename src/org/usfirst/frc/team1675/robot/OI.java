@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.commands.Wait;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawOutput;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
@@ -28,10 +32,10 @@ public class OI {
 	
 	
 	private Joystick operatorController = new Joystick(XBoxControllerMap.operatorControllerPort);
-	private JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.A_BUTTON);
 	private JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
 	private JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
-	private JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON);
 	private DPadButton operatorDPadRight = new DPadButton(operatorController, DPadButton.Direction.RIGHT);
 	private DPadButton operatorDPadLeft = new DPadButton(operatorController, DPadButton.Direction.LEFT);
 	private DPadButton operatorDPadUp = new DPadButton(operatorController, DPadButton.Direction.UP);
@@ -43,6 +47,12 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
+		
+		
+		operatorAButton.whenPressed(new ClawIntake());
+		operatorAButton.whenReleased(new ClawIdle());
+		operatorXButton.whenPressed(new ClawOutput());
+		operatorXButton.whenReleased(new ClawIdle());
 		
 		
 
