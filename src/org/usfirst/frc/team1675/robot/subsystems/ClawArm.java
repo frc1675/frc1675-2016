@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -23,6 +24,7 @@ public class ClawArm extends Subsystem {
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
 
+		armMotor.changeControlMode(TalonControlMode.PercentVbus);
 	}
 
 	public void moveArm(double speed) {
@@ -47,13 +49,27 @@ public class ClawArm extends Subsystem {
 		armMotor.set(position);
 
 	}
+	
+	public void moveWithoutEncoder(double power){
+		byte b = 2;
+					
+		SmartDashboard.putNumber("Motor power sent to motor", power);
+		armMotor.set(power, b);
+		SmartDashboard.putNumber("Motor power received by motor", armMotor.get());		
+	}
+	
 
 	public void initDefaultCommand() {
 
 		setDefaultCommand(new MoveWithController());
 
 	}
-
+	
+	public double getPosition(){
+		return armMotor.getPosition();
+	
+	
+}
 	public void stopAndDisable() {
 
 		armMotor.changeControlMode(TalonControlMode.PercentVbus); // change mode

@@ -64,7 +64,7 @@ public class RobotMap {
 		public static final double SCORE_POSITION = 1;
 		public static final int MINIMUM = 90;
 		public static final int MAXIMUM = 200;
-		public static final int SCALING_VALUE = 1;
+		public static final double SCALING_VALUE = 0.75;
 
 		public static final double P = 0.01;
 		public static final double I = 0;
