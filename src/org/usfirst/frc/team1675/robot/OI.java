@@ -14,16 +14,16 @@ public class OI {
 
 
 	private Joystick driverController = new Joystick(XBoxControllerMap.driverControllerPort);
-	private JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
-	private JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
-	private JoystickButton driverYButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
-	private JoystickButton driverXButton = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.A_BUTTON);
+	private JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.B_BUTTON);
+	private JoystickButton driverYButton = new JoystickButton(driverController, XBoxControllerMap.Y_BUTTON);
+	private JoystickButton driverXButton = new JoystickButton(driverController, XBoxControllerMap.X_BUTTON);
 	private DPadButton driverDPadRight = new DPadButton(driverController, DPadButton.Direction.RIGHT);
 	private DPadButton driverDPadLeft = new DPadButton(driverController, DPadButton.Direction.LEFT);
 	private DPadButton driverDPadUp = new DPadButton(driverController, DPadButton.Direction.UP);
 	private DPadButton driverDPadDown = new DPadButton(driverController, DPadButton.Direction.DOWN);
-	private JoystickButton driverRightBumper = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
-	private JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.driverControllerPort);
+	private JoystickButton driverRightBumper = new JoystickButton(driverController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+	private JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
 	
 
 	private TriggerButton driverRightTrigger = new TriggerButton(driverController, true, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
@@ -33,15 +33,15 @@ public class OI {
 	
 	private Joystick operatorController = new Joystick(XBoxControllerMap.operatorControllerPort);
 	private JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.A_BUTTON);
-	private JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
-	private JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.B_BUTTON);
+	private JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.Y_BUTTON);
 	private JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON);
 	private DPadButton operatorDPadRight = new DPadButton(operatorController, DPadButton.Direction.RIGHT);
 	private DPadButton operatorDPadLeft = new DPadButton(operatorController, DPadButton.Direction.LEFT);
 	private DPadButton operatorDPadUp = new DPadButton(operatorController, DPadButton.Direction.UP);
 	private DPadButton operatorDPadDown = new DPadButton(operatorController, DPadButton.Direction.DOWN);
-	private JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
-	private JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.operatorControllerPort);
+	private JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+	private JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
 
 	private TriggerButton operatorRightTrigger = new TriggerButton(operatorController, true, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
@@ -53,9 +53,6 @@ public class OI {
 		operatorAButton.whenReleased(new ClawIdle());
 		operatorXButton.whenPressed(new ClawOutput());
 		operatorXButton.whenReleased(new ClawIdle());
-		
-		
-
 	}
 	
 	
