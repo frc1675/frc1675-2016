@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
+import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,11 +23,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveBase driveBase;
+	public static ClawSubSystem clawSub;
 	public static LiftArm liftArm;
 	
 	static{
 		try{
 			driveBase = new DriveBase();
+			clawSub = new ClawSubSystem();
 			liftArm = new LiftArm();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -36,9 +39,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
     Command autonomousCommand;
-    
-    
-    
     SendableChooser chooser;
 
     /**

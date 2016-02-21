@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1675.robot.subsystems;
 
 import org.usfirst.frc.team1675.robot.RobotMap;
-import org.usfirst.frc.team1675.robot.commands.CheeseDrive;
-import org.usfirst.frc.team1675.robot.commands.TankDrive;
+import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -34,12 +34,12 @@ public class DriveBase extends Subsystem {
 	private AHRS ahrs;
 	
 	public DriveBase(){
-		leftFront = new VictorSP(RobotMap.PMWChannels.LEFT_FRONT_MOTOR);
+		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
 		leftMid = new CANTalon(RobotMap.CANDeviceIDs.LEFT_MOTOR);
-		leftBack = new VictorSP(RobotMap.PMWChannels.LEFT_BACK_MOTOR);
-		rightFront = new VictorSP(RobotMap.PMWChannels.RIGHT_FRONT_MOTOR);
+		leftBack = new VictorSP(RobotMap.PWMChannels.LEFT_BACK_MOTOR);
+		rightFront = new VictorSP(RobotMap.PWMChannels.RIGHT_FRONT_MOTOR);
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
-		rightBack = new VictorSP(RobotMap.PMWChannels.RIGHT_BACK_MOTOR);
+		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 		
 		ahrs = new AHRS(SerialPort.Port.kMXP);
 	}

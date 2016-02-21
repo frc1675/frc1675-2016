@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1675.robot.commands;
+package org.usfirst.frc.team1675.robot.commands.drivebase;
 
 import org.usfirst.frc.team1675.robot.Robot;
 
@@ -21,19 +21,9 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double rightPower = -Robot.oi.getDriverRightYAxis();
-    	double leftPower = -Robot.oi.getDriverLeftYAxis();
+    	double rightPower = Robot.oi.getDriverRightYAxis();
+    	double leftPower = Robot.oi.getDriverLeftYAxis();
     	
-//    	if(Math.abs(rightPower) > 0.1675){
-//    		Robot.driveBase.setLeftMotorPower(leftPower);
-//    	} else {
-//    		Robot.driveBase.setLeftMotorPower(0.0);
-//    	}
-//    	if(Math.abs(leftPower) > 0.1675){
-//    		Robot.driveBase.setRightMotorPower(rightPower);
-//    	} else {
-//    		Robot.driveBase.setLeftMotorPower(0.0);
-//    	}
     	Robot.driveBase.setLeftMotorPower(leftPower);
     	Robot.driveBase.setRightMotorPower(rightPower);
     }
