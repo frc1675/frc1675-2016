@@ -16,9 +16,9 @@ public class LowBarScore extends CommandGroup {
     public  LowBarScore() {
     	
     	addSequential(new Wait(1.5));//Lower claw arm here will go
-    	addSequential(new DriveStraightForTime(0.5,6.0));
-    	addSequential(new TurnWithGyro(60.0));
-    	addSequential(new DriveStraightForTime(0.5,2.0));
+    	addSequential(new DriveStraightForTime(0.5,3.0));
+    	addSequential(new TurnWithGyro(40.0));
+    	addSequential(new DriveStraightForTime(0.5,2.5));
     	addSequential(new ClawOutputForTime(2.0));
     	addSequential(new ClawIntakeForTime(1.0));
     	addSequential(new ClawOutputForTime(1.0));
