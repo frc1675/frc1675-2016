@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
+import org.usfirst.frc.team1675.robot.subsystems.Vision;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,11 +24,13 @@ public class Robot extends IterativeRobot {
 
 	public static DriveBase driveBase;
 	public static ClawSubSystem clawSub;
+	public static Vision vision;
 		
 	static{
 		try{
 			driveBase = new DriveBase();
 			clawSub = new ClawSubSystem();
+			vision = new Vision();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
