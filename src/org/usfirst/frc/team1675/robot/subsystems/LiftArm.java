@@ -22,7 +22,8 @@ public class LiftArm extends Subsystem {
 		armMotor = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_ZERO);
 		armMotor.setInverted(true);
 		upLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_NINE);
-		downLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_EIGHT);
+		downLimitSwitch = new DigitalInput(
+				RobotMap.DIOChannels.EMPTY_PORT_EIGHT);
 	}
 
 	public boolean getLimitValueUp() {
@@ -33,56 +34,48 @@ public class LiftArm extends Subsystem {
 		return downLimitSwitch.get();
 	}
 
-	public void moveArm(double power) { 
+	public void moveArm(double power) {
 		SmartDashboard.putBoolean("Top Limit Switch", getLimitValueUp());
 		SmartDashboard.putBoolean("Bottom Limit Switch", getLimitValueDown());
 		SmartDashboard.putNumber("Lift Arm Power", power);
-			
-		
-		
-		
-		if(getLimitValueUp() == true){			
-			if(power < 0){
-				armMotor.set(power);
-			}else{
-				armMotor.set(0);
-			}			
-		}
-		else if(getLimitValueDown() == true){			
-			if(power > 0){
-				armMotor.set(power);
-			}else{
-				armMotor.set(0);
-			}			
-		}		
-		else{
-			armMotor.set(power);			
-		}
-		
-				
-		
-//		if (getLimitValueUp() == true ){
-//			
-//			if(power > 0 ){
-//				armMotor.set(power);
-//			}else{
-//				armMotor.set(0);
-//			}
-//			
-//		}else if(getLimitValueDown() == true){
-//			
-//			if(power < 0){
-//				armMotor.set(power);
-//			}else{
-//				armMotor.set(0);
-//			}
-//			
-//		}		
-//		else {
-//			armMotor.set(power);
-//
-//		}
 
+		if (getLimitValueUp() == true) {
+			if (power < 0) {
+				armMotor.set(power);
+			} else {
+				armMotor.set(0);
+			}
+		} else if (getLimitValueDown() == true) {
+			if (power > 0) {
+				armMotor.set(power);
+			} else {
+				armMotor.set(0);
+			}
+		} else {
+			armMotor.set(power);
+		}
+
+		// if (getLimitValueUp() == true ){
+		//
+		// if(power > 0 ){
+		// armMotor.set(power);
+		// }else{
+		// armMotor.set(0);
+		// }
+		//
+		// }else if(getLimitValueDown() == true){
+		//
+		// if(power < 0){
+		// armMotor.set(power);
+		// }else{
+		// armMotor.set(0);
+		// }
+		//
+		// }
+		// else {
+		// armMotor.set(power);
+		//
+		// }
 	}
 
 	// Put methods for controlling this subsystem
