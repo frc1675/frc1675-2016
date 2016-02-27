@@ -138,19 +138,23 @@ public class OI {
 		return checkForDeadzone(rightXControllerValue * scaleValue);
 	}
 	
-	public double checkForDeadzone(double input) {
-		if (Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE) {
+	private double checkForDeadzone(double vector) {
+		if (Math.abs(vector) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE) {
 			return 0.0;
 		} else {
-			return deadzone( input);
+			
+			double scaledVector = (vector/ Math.abs(vector))*(Math.abs(vector)- RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE)/
+					(1-RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE);
+			
+			return scaledVector;
+			
 		}
 	}
 
-	public double deadzone(double input){
-		if(Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE){
-			return 0;		
-		}
-		return input;
+	public static void main (String [] args){
+		OI myOI = new OI();
+	double returnValue = myOI.checkForDeadzone(0);
+		System.out.println(returnValue);
 	}
 }
 

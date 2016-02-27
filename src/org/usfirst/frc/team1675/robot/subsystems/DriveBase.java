@@ -46,7 +46,7 @@ public class DriveBase extends Subsystem {
 		
 	//sets all of the motor powers on the left side
 	public void setLeftMotorPower(double speed){
-		System.out.println("left go " + speed);
+		speed = advancedMotorDeadzone(speed);
 		setLeftFrontMotorPower(speed);
 		setLeftMidMotorPower(speed);
 		setLeftBackMotorPower(speed);
@@ -54,6 +54,7 @@ public class DriveBase extends Subsystem {
 	
 	//sets all of the motor powers on the right side
 	public void setRightMotorPower(double speed){
+		speed = advancedMotorDeadzone(speed);
 		setRightFrontMotorPower(speed);
 		setRightMidMotorPower(speed);
 		setRightBackMotorPower(speed);
@@ -98,6 +99,13 @@ public class DriveBase extends Subsystem {
 	
 	public void resetGyro(){
 		ahrs.reset();
+	}
+	
+	private double advancedMotorDeadzone(double vector){
+		double power = (vector/Math.abs(vector))*((1-RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE)*
+				(Math.abs(vector) + RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE));
+		return power;
+		
 	}
 	
     public void initDefaultCommand() {
