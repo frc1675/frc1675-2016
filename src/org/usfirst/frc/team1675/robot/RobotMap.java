@@ -36,8 +36,8 @@ public class RobotMap {
 		public static final int EMPTY_PORT_THREE = 3;
 		public static final int EMPTY_PORT_FOUR = 4;
 		public static final int EMPTY_PORT_FIVE = 5;
-		public static final int EMPTY_PORT_SIX = 6;
-		public static final int EMPTY_PORT_SEVEN = 7;
+		public static final int ARM_DOWN_LIMIT_SWITCH = 6;
+		public static final int ARM_UP_LIMIT_SWITCH = 7;
 		public static final int EMPTY_PORT_EIGHT = 8;
 		public static final int EMPTY_PORT_NINE = 9;
 
