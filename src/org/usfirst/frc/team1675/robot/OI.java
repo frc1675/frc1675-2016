@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
@@ -47,6 +49,8 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
+		operatorYButton.whenPressed(new MoveLiftArmToHome());
+		operatorBButton.whenPressed(new MoveLiftArmToDown());
 		
 		
 		operatorAButton.whenPressed(new ClawIntake());
@@ -123,8 +127,11 @@ public class OI {
 	
 	public double getOperatorRightYAxis(double scaleValue){
 		double rightYControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return -checkForDeadzone(rightYControllerValue * scaleValue);
+		double deadzonedValue = checkForDeadzone(rightYControllerValue);
+		double scaledDeadzonedValue = deadzonedValue*scaleValue;
+		return -scaledDeadzonedValue;
 	}
+	
 	
 	public double getOperatorRightXAxis(double scaleValue){
 		double rightXControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
@@ -145,6 +152,5 @@ public class OI {
 		}
 		return input;
 	}
-
-
 }
+
