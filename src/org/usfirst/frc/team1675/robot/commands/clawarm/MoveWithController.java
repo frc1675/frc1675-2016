@@ -20,15 +20,14 @@ public class MoveWithController extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double motorPower = Robot.oi
-				.getOperatorLeftYAxis(RobotMap.ArmConstants.SCALING_VALUE);
+		double motorPower = Robot.oi.getOperatorLeftYAxis(RobotMap.ArmConstants.SCALING_VALUE);
 
 		// Robot.clawArm.moveArm(motorPower);
 		Robot.clawArm.moveWithoutEncoder(motorPower);
 		// SmartDashboard.putNumber("Encoder Position of Arm",
 		// Robot.clawArm.getPosition());
 	}
-
+	
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return false;

@@ -8,13 +8,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
-
 import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
+import org.usfirst.frc.team1675.robot.utils.Zamboni;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	Zamboni.clear();
     }
 	
 	public void disabledPeriodic() {
