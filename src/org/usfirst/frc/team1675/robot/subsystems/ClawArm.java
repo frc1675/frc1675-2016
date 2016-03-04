@@ -23,7 +23,7 @@ public class ClawArm extends Subsystem {
 
 	public ClawArm() {
 		armMotor = new CANTalon(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
-		accelerationController = new AccelerationSpeedController(armMotor, 0.10, 120);
+		accelerationController = new AccelerationSpeedController(armMotor, 0.10, 160);
 		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
