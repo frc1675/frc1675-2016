@@ -10,6 +10,12 @@ import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.Vision;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 
+import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
+import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
+import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
+import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
+import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
+import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,21 +27,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
 	public static DriveBase driveBase;
 	public static ClawSubSystem clawSub;
+	public static ClawArm clawArm;
+	public static LiftArm liftArm;
 	public static Vision vision;
-		
+
 	static{
 		try{
 			driveBase = new DriveBase();
 			clawSub = new ClawSubSystem();
+			clawArm = new ClawArm();
+			liftArm = new LiftArm();
 			vision = new Vision();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+		
 	public static OI oi;
 
     Command autonomousCommand;
@@ -46,7 +57,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();		
+		oi = new OI();	
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
@@ -74,8 +85,10 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+	  public void autonomousInit() {
+        //autonomousCommand = (Command) chooser.getSelected();
+    	//autonomousCommand = new TurnWithGyro(90.0);
+    	autonomousCommand = new LowBarScore();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -87,7 +100,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-    	
+    	System.out.println("start auto");
+
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

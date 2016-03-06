@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1675.robot;
 
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
@@ -47,8 +49,10 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
-		
-		
+		operatorYButton.whenPressed(new MoveLiftArmToHome());
+//		operatorBButton.whenPressed(new MoveLiftArmToDown());
+//		
+//		
 		operatorAButton.whenPressed(new ClawIntake());
 		operatorAButton.whenReleased(new ClawIdle());
 		operatorXButton.whenPressed(new ClawOutput());
@@ -123,28 +127,34 @@ public class OI {
 	
 	public double getOperatorRightYAxis(double scaleValue){
 		double rightYControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-		return -checkForDeadzone(rightYControllerValue * scaleValue);
+		double deadzonedValue = checkForDeadzone(rightYControllerValue);
+		double scaledDeadzonedValue = deadzonedValue*scaleValue;
+		return -scaledDeadzonedValue;
 	}
+	
 	
 	public double getOperatorRightXAxis(double scaleValue){
 		double rightXControllerValue = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
 		return checkForDeadzone(rightXControllerValue * scaleValue);
 	}
 	
-	public double checkForDeadzone(double input) {
-		if (Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE) {
+	private double checkForDeadzone(double vector) {
+		if (Math.abs(vector) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE) {
 			return 0.0;
 		} else {
-			return deadzone( input);
+			
+			double scaledVector = (vector/ Math.abs(vector))*(Math.abs(vector)- RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE)/
+					(1-RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE);
+			
+			return scaledVector;
+			
 		}
 	}
 
-	public double deadzone(double input){
-		if(Math.abs(input) <= RobotMap.DriverConstants.DEAD_ZONE_TOLERANCE){
-			return 0;		
-		}
-		return input;
+	public static void main (String [] args){
+		OI myOI = new OI();
+	double returnValue = myOI.checkForDeadzone(0);
+		System.out.println(returnValue);
 	}
-
-
 }
+

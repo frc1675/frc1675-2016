@@ -4,11 +4,18 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -24,7 +31,7 @@ public class DriveBase extends Subsystem {
 	private CANTalon rightMid;
 	private SpeedController rightBack;
 	
-	private Gyro gyro;
+	private AHRS ahrs;
 	
 	public DriveBase(){
 		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
@@ -34,19 +41,20 @@ public class DriveBase extends Subsystem {
 		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
 		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 		
-		gyro = new AnalogGyro(RobotMap.AnalogInChannels.EMPTY_PORT_ZERO);
+		ahrs = new AHRS(SerialPort.Port.kMXP);
 	}
 		
 	//sets all of the motor powers on the left side
 	public void setLeftMotorPower(double speed){
+		speed = advancedMotorDeadzone(speed);
 		setLeftFrontMotorPower(speed);
 		setLeftMidMotorPower(speed);
 		setLeftBackMotorPower(speed);
-		
 	}
 	
 	//sets all of the motor powers on the right side
 	public void setRightMotorPower(double speed){
+		speed = advancedMotorDeadzone(speed);
 		setRightFrontMotorPower(speed);
 		setRightMidMotorPower(speed);
 		setRightBackMotorPower(speed);
@@ -80,6 +88,25 @@ public class DriveBase extends Subsystem {
 		rightBack.set(-speed);
 	}
 	
+	public void setTalonsToVoltageMode(){
+		leftMid.changeControlMode(TalonControlMode.PercentVbus);
+		rightMid.changeControlMode(TalonControlMode.PercentVbus);
+	}
+	
+	public double getAngle(){
+		return ahrs.getAngle();
+	}
+	
+	public void resetGyro(){
+		ahrs.reset();
+	}
+	
+	private double advancedMotorDeadzone(double vector){
+		double power = (vector/Math.abs(vector))*((1-RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE)*
+				(Math.abs(vector) + RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE));
+		return power;
+		
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
