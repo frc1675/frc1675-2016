@@ -1,10 +1,10 @@
 package org.usfirst.frc.team1675.robot.commands.auto;
 
-import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
