@@ -23,7 +23,8 @@ public class ClawArm extends Subsystem {
 
 	public ClawArm() {
 		armMotor = new CANTalon(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
-		accelerationController = new AccelerationSpeedController(armMotor, 0.10, 160);
+		accelerationController = new AccelerationSpeedController(armMotor,
+				0.10, 160);
 		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
@@ -87,6 +88,7 @@ public class ClawArm extends Subsystem {
 				getLimitValueUp());
 		SmartDashboard.putBoolean("Bottom Claw Arm Limit Switch",
 				getLimitValueDown());
+		SmartDashboard.putNumber("Encoder Value", armMotor.getPosition());
 		moveWithinLimitSwitches(accelerationController, power);
 		SmartDashboard.putNumber("Motor power received by motor",
 				accelerationController.get());
