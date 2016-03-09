@@ -34,13 +34,14 @@ public class TurnWithGyro extends PIDCommand {
         this.getPIDController().setToleranceBuffer(20);
         this.getPIDController().setContinuous(true);
         
-    	this.getPIDController().setSetpoint(degreesSetpoint);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveBase.setTalonsToVoltageMode();
     	Robot.driveBase.resetGyro();
+    	this.getPIDController().setSetpoint(degreesSetpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
