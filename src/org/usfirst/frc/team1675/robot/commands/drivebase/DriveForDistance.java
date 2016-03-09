@@ -53,11 +53,11 @@ public class DriveForDistance extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putNumber("DFD Setpoint", this.getSetpoint());
-    	SmartDashboard.putNumber("DFD Position", this.getPosition());
-    	SmartDashboard.putNumber("DFD Error", this.getPIDController().getError());
-    	SmartDashboard.putNumber("DFD Average Error", this.getPIDController().getAvgError());
-    	SmartDashboard.putBoolean("DFD On Target", this.getPIDController().onTarget());
+    	//SmartDashboard.putNumber("DFD Setpoint", this.getSetpoint());
+    	//SmartDashboard.putNumber("DFD Position", this.getPosition());
+    	//SmartDashboard.putNumber("DFD Error", this.getPIDController().getError());
+    	//SmartDashboard.putNumber("DFD Average Error", this.getPIDController().getAvgError());
+    	//SmartDashboard.putBoolean("DFD On Target", this.getPIDController().onTarget());
     	
     	return this.getPIDController().onTarget();
     }
@@ -77,14 +77,14 @@ public class DriveForDistance extends PIDCommand {
 	@Override
 	protected double returnPIDInput() {
 		int encPos = Robot.driveBase.getEncPosition();
-		SmartDashboard.putNumber("DS Enc Pos", encPos - initialEncoderValue);
-		SmartDashboard.putNumber("DS Inches", (encPos - initialEncoderValue) / TICKS_PER_INCH);
+		//SmartDashboard.putNumber("DS Enc Pos", encPos - initialEncoderValue);
+		//SmartDashboard.putNumber("DS Inches", (encPos - initialEncoderValue) / TICKS_PER_INCH);
 		return encPos;
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
-		SmartDashboard.putNumber("DS PIDOut", output);
+		//SmartDashboard.putNumber("DS PIDOut", output);
 		Robot.driveBase.setLeftMotorPower(output);
 		Robot.driveBase.setRightMotorPower(output);
 		

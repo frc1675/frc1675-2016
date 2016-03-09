@@ -7,7 +7,6 @@ import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;

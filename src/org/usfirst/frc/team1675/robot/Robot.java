@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();	
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+       
     }
 	
 	/**
@@ -103,7 +103,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-    	System.out.println("start auto");
+    	
 
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
