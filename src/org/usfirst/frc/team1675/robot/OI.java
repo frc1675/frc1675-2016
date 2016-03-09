@@ -6,6 +6,7 @@ import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutput;
+import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
@@ -51,8 +52,8 @@ public class OI {
 	public OI(){
 		operatorYButton.whenPressed(new MoveLiftArmToHome());
 //		operatorBButton.whenPressed(new MoveLiftArmToDown());
-//		
-//		
+
+		operatorBButton.whenPressed(new ClawArmMoveForXSeconds(  1 , -0.3));
 		operatorAButton.whenPressed(new ClawIntake());
 		operatorAButton.whenReleased(new ClawIdle());
 		operatorXButton.whenPressed(new ClawOutput());
