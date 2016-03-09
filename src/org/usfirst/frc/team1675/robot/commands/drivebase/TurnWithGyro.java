@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1675.robot.commands;
+package org.usfirst.frc.team1675.robot.commands.drivebase;
 
 import java.security.spec.DSAGenParameterSpec;
 
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnWithGyro extends PIDCommand {
 
 	
-	private static final double kP = 0.012;
+	private static final double kP = 0.004;
 	private static final double kI = 0;
 	private static final double kD = 0;
 	
@@ -26,20 +26,22 @@ public class TurnWithGyro extends PIDCommand {
     public TurnWithGyro(double degreesSetpoint) {
     	super(kP, kI, kD);
         requires(Robot.driveBase);
-        Robot.driveBase.resetGyro();
+        
         this.degreesSetpoint = degreesSetpoint;
         this.getPIDController().setInputRange(0.0, 360.0);
-        this.getPIDController().setOutputRange(-1.0, 1.0);
-        this.getPIDController().setAbsoluteTolerance(5.0);
+        this.getPIDController().setOutputRange(-0.5, 0.5);
+        this.getPIDController().setAbsoluteTolerance(2.0);
+        this.getPIDController().setToleranceBuffer(20);
         this.getPIDController().setContinuous(true);
         
-    	this.getPIDController().setSetpoint(degreesSetpoint);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveBase.setTalonsToVoltageMode();
-    	
+    	Robot.driveBase.resetGyro();
+    	this.getPIDController().setSetpoint(degreesSetpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -49,16 +51,14 @@ public class TurnWithGyro extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println("error: " + this.getPIDController().getError());
-    	System.out.println("on target? " + this.getPIDController().onTarget());
+    	SmartDashboard.putNumber("Gyro Turn Setpoint", this.getSetpoint());
+    	SmartDashboard.putNumber("Gyro Turn Position", this.getPosition());
+    	SmartDashboard.putNumber("Gyro Turn Error", this.getPIDController().getError());
+    	SmartDashboard.putNumber("Gyro Turn Average Error", this.getPIDController().getAvgError());
+    	SmartDashboard.putBoolean("Gyro On Target", getPIDController().onTarget());
     	
-    	boolean returnVal = false;
     	
-    	if(Math.abs(this.getPIDController().getError()) < TOLERANCE){
-    		returnVal = true;
-    	}
-    	
-        return returnVal;
+    	return getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true

@@ -112,5 +112,10 @@ public class DriveBase extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new TankDrive());
     }
+
+	public int getEncPosition() {
+		// On practice bot only right side encoder works.
+		return rightMid.getEncPosition();
+	}
 }
 

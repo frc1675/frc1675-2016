@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.Vision;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
-import org.usfirst.frc.team1675.robot.commands.TurnWithGyro;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
+import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
@@ -88,7 +89,8 @@ public class Robot extends IterativeRobot {
 	 */
 	  public void autonomousInit() {
         //autonomousCommand = (Command) chooser.getSelected();
-    	//autonomousCommand = new TurnWithGyro(90.0);
+    	//autonomousCommand = new TurnWithGyro(60.0);
+		//autonomousCommand = new DriveForDistance(204.0);
     	autonomousCommand = new LowBarScore();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
