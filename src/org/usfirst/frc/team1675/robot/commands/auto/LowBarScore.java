@@ -3,6 +3,7 @@ package org.usfirst.frc.team1675.robot.commands.auto;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
+import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 
@@ -16,9 +17,9 @@ public class LowBarScore extends CommandGroup {
     public  LowBarScore() {
     	
     	addSequential(new Wait(1.5));//Lower claw arm here will go
-    	addSequential(new DriveStraightForTime(0.5,3.0));
-    	addSequential(new TurnWithGyro(40.0));
-    	addSequential(new DriveStraightForTime(0.5,2.5));
+    	addSequential(new DriveForDistance(215.0));
+    	addSequential(new TurnWithGyro(50.0));
+    	addSequential(new DriveForDistance(135.0));
     	addSequential(new ClawOutputForTime(2.0));
     	addSequential(new ClawIntakeForTime(1.0));
     	addSequential(new ClawOutputForTime(1.0));

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveForDistance extends PIDCommand {
 
 	
-	private static final double kP = 0.0005;
+	private static final double kP = 0.00015;
 	private static final double kI = 0;
 	private static final double kD = 0;
 	
@@ -31,18 +31,19 @@ public class DriveForDistance extends PIDCommand {
     public DriveForDistance(double inchesSetpoint) {
     	super(kP, kI, kD);
         requires(Robot.driveBase);
-        initialEncoderValue = Robot.driveBase.getEncPosition();
         this.inchesSetpoint = inchesSetpoint;
 
         this.getPIDController().setOutputRange(-0.5, 0.5);
         this.getPIDController().setAbsoluteTolerance(TOLERANCE);
-        
-    	this.getPIDController().setSetpoint(initialEncoderValue + (inchesSetpoint * TICKS_PER_INCH));
+        this.getPIDController().setToleranceBuffer(20);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveBase.setTalonsToVoltageMode();
+    	initialEncoderValue = Robot.driveBase.getEncPosition();
+    	this.getPIDController().setSetpoint(initialEncoderValue + (inchesSetpoint * TICKS_PER_INCH));
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -56,6 +57,7 @@ public class DriveForDistance extends PIDCommand {
     	SmartDashboard.putNumber("DFD Position", this.getPosition());
     	SmartDashboard.putNumber("DFD Error", this.getPIDController().getError());
     	SmartDashboard.putNumber("DFD Average Error", this.getPIDController().getAvgError());
+    	SmartDashboard.putBoolean("DFD On Target", this.getPIDController().onTarget());
     	
     	return this.getPIDController().onTarget();
     }

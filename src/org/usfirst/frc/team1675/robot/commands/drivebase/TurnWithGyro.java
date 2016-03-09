@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnWithGyro extends PIDCommand {
 
 	
-	private static final double kP = 0.012;
+	private static final double kP = 0.004;
 	private static final double kI = 0;
 	private static final double kD = 0;
 	
@@ -29,8 +29,9 @@ public class TurnWithGyro extends PIDCommand {
         
         this.degreesSetpoint = degreesSetpoint;
         this.getPIDController().setInputRange(0.0, 360.0);
-        this.getPIDController().setOutputRange(-1.0, 1.0);
-        this.getPIDController().setAbsoluteTolerance(5.0);
+        this.getPIDController().setOutputRange(-0.5, 0.5);
+        this.getPIDController().setAbsoluteTolerance(2.0);
+        this.getPIDController().setToleranceBuffer(20);
         this.getPIDController().setContinuous(true);
         
     	this.getPIDController().setSetpoint(degreesSetpoint);
@@ -53,6 +54,7 @@ public class TurnWithGyro extends PIDCommand {
     	SmartDashboard.putNumber("Gyro Turn Position", this.getPosition());
     	SmartDashboard.putNumber("Gyro Turn Error", this.getPIDController().getError());
     	SmartDashboard.putNumber("Gyro Turn Average Error", this.getPIDController().getAvgError());
+    	SmartDashboard.putBoolean("Gyro On Target", getPIDController().onTarget());
     	
     	
     	return getPIDController().onTarget();
