@@ -35,9 +35,8 @@ public class LiftArm extends Subsystem {
 	}
 
 	public void moveArm(double power) {
-		SmartDashboard.putBoolean("Top Limit Switch", getLimitValueUp());
-		SmartDashboard.putBoolean("Bottom Limit Switch", getLimitValueDown());
-		SmartDashboard.putNumber("Lift Arm Power", power);
+		SmartDashboard.putBoolean("Lifter Up", getLimitValueUp());
+		SmartDashboard.putBoolean("Lifter Down", getLimitValueDown());
 
 		if (getLimitValueUp() == true) {
 			if (power < 0) {
