@@ -16,6 +16,7 @@ import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
+import org.usfirst.frc.team1675.robot.subsystems.PDPanel;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static ClawArm clawArm;
 	public static LiftArm liftArm;
 	public static Vision vision;
+	public static PDPanel pdPanel;
 
 	static{
 		try{
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 			clawArm = new ClawArm();
 			liftArm = new LiftArm();
 			vision = new Vision();
+			pdPanel = new PDPanel();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
