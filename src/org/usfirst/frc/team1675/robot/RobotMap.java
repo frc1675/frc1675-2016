@@ -3,15 +3,12 @@ package org.usfirst.frc.team1675.robot;
 public class RobotMap {
 
 	public static class PWMChannels {
-		public static final int EMPTY_PORT_ZERO = 0;
+		public static final int LIFTER_MOTOR = 0;
 		public static final int RIGHT_BACK_MOTOR = 1;
 		public static final int RIGHT_FRONT_MOTOR = 2;
 		public static final int LEFT_FRONT_MOTOR = 3;
-		public static final int EMPTY_PORT_FOUR = 4;
-		public static final int EMPTY_PORT_FIVE = 5;
-		public static final int EMPTY_PORT_SIX = 6;
-		public static final int EMPTY_PORT_SEVEN = 7;
-		public static final int EMPTY_PORT_EIGHT = 8;
+		public static final int CLAW_TOP_MOTOR = 7;
+		public static final int CLAW_BOTTOM_MOTOR = 8;
 		public static final int LEFT_BACK_MOTOR = 9;
 
 	}
@@ -30,32 +27,11 @@ public class RobotMap {
 	}
 
 	public static class DIOChannels {
-		public static final int EMPTY_PORT_ZERO = 0;
-		public static final int EMPTY_PORT_ONE = 1;
-		public static final int EMPTY_PORT_TWO = 2;
-		public static final int EMPTY_PORT_THREE = 3;
-		public static final int EMPTY_PORT_FOUR = 4;
-		public static final int EMPTY_PORT_FIVE = 5;
 		public static final int ARM_DOWN_LIMIT_SWITCH = 6;
 		public static final int ARM_UP_LIMIT_SWITCH = 7;
-		public static final int EMPTY_PORT_EIGHT = 8;
-		public static final int EMPTY_PORT_NINE = 9;
+		public static final int LIFTER_DOWN_LIMIT_SWITCH = 8;
+		public static final int LIFTER_UP_LIMIT_SWITCH = 9;
 
-	}
-
-	public static class AnalogInChannels {
-		public static final int EMPTY_PORT_ZERO = 0;
-		public static final int EMPTY_PORT_ONE = 1;
-		public static final int EMPTY_PORT_TWO = 2;
-		public static final int EMPTY_PORT_THREE = 3;
-
-	}
-
-	public static class RelayChannels {
-		public static final int EMPTY_PORT_ZERO = 0;
-		public static final int EMPTY_PORT_ONE = 1;
-		public static final int EMPTY_PORT_TWO = 2;
-		public static final int EMPTY_PORT_THREE = 3;
 	}
 
 	public static class ArmConstants {

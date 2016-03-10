@@ -20,8 +20,8 @@ public class ClawSubSystem extends Subsystem {
 	private SpeedController rollerBottom;
 
 	public ClawSubSystem() {
-		rollerTop = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_SEVEN);
-		rollerBottom = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_EIGHT);
+		rollerTop = new VictorSP(RobotMap.PWMChannels.CLAW_TOP_MOTOR);
+		rollerBottom = new VictorSP(RobotMap.PWMChannels.CLAW_BOTTOM_MOTOR);
 	}
 
 	public void setRollerInPower(double value) {
@@ -32,16 +32,6 @@ public class ClawSubSystem extends Subsystem {
 	public void setRollerOutPower(double value) {
 		rollerTop.set(value);
 		rollerBottom.set(-value);
-
-	}
-
-	public boolean hasBall() {
-		
-//		if (buttonA.isPressed) { // buttonA is filler until we have controller
-//									// map
-//			return true;
-//		} else
-		return false;
 	}
 
 	public void initDefaultCommand() {

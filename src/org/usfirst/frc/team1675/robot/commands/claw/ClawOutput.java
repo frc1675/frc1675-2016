@@ -26,12 +26,8 @@ public class ClawOutput extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.clawSub.hasBall() == false){//Improve by adding something like "button.pressed() &&..."
-    		return false;
-    	} else{
-    		return true;
-    	}
-    }
+		return false;
+	}
 
     // Called once after isFinished returns true
     protected void end() {
