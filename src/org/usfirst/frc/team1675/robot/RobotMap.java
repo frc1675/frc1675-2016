@@ -77,8 +77,8 @@ public class RobotMap {
 	}
 	
 	public static class LiftArmConstants{
-		public static final double LIFT_ARM_UP_SPEED = 0.5;
-		public static final double LIFT_ARM_DOWN_SPEED = -0.5;
+		public static final double LIFT_ARM_UP_SPEED = 1;
+		public static final double LIFT_ARM_DOWN_SPEED = -1;
 	}
 	public static class DriveBaseConstants{
 		public static final double DRIVE_BASE_MOTOR_DEAD_ZONE = .1675;
