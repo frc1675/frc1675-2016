@@ -23,10 +23,12 @@ public class DriveForDistance extends PIDCommand {
 	private static final double TICKS_PER_INCH = 38.2;
 	
 	private static final double TOLERANCE = TICKS_PER_INCH * 2.0;
+	
+	
 
 	
-	double inchesSetpoint;
-	int initialEncoderValue;
+	private double inchesSetpoint;
+	private int initialEncoderValue;
 	
     public DriveForDistance(double inchesSetpoint) {
     	super(kP, kI, kD);
@@ -36,6 +38,11 @@ public class DriveForDistance extends PIDCommand {
         this.getPIDController().setOutputRange(-0.5, 0.5);
         this.getPIDController().setAbsoluteTolerance(TOLERANCE);
         this.getPIDController().setToleranceBuffer(20);
+    }
+    
+    public DriveForDistance(double inchesSetpoint, double timeout) {
+    	this(inchesSetpoint);
+    	this.setTimeout(timeout);
     }
 
     // Called just before this Command runs the first time
@@ -59,7 +66,8 @@ public class DriveForDistance extends PIDCommand {
     	SmartDashboard.putNumber("DFD Average Error", this.getPIDController().getAvgError());
     	SmartDashboard.putBoolean("DFD On Target", this.getPIDController().onTarget());
     	
-    	return this.getPIDController().onTarget();
+    	
+    	return this.isTimedOut() || this.getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true

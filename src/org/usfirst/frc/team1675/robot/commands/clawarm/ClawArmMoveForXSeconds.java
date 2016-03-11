@@ -24,7 +24,7 @@ public class ClawArmMoveForXSeconds extends Command {
 
 	protected void execute() {
 
-		Robot.clawArm.moveWithoutEncoderWithAcceleration(power);
+		Robot.clawArm.moveWithoutEncoder(power);
 
 	}
 
@@ -39,7 +39,7 @@ public class ClawArmMoveForXSeconds extends Command {
 	protected void end() {
 		clawControlTimer.stop();
 		clawControlTimer.reset();
-		Robot.clawArm.moveWithoutEncoderWithAcceleration(0);
+		Robot.clawArm.moveWithoutEncoder(0);
 
 	}
 

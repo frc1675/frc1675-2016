@@ -15,7 +15,11 @@ import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
+import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
+import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
@@ -63,6 +67,11 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();	
         chooser = new SendableChooser();
+        chooser.addObject("Low Bar Score", new LowBarScore());
+        chooser.addObject("Just Drop Claw", new ClawArmMoveForXSeconds(0.5, -0.3));
+        chooser.addObject("Spit", new ClawOutputForTime(2.0));
+        chooser.addObject("Suck", new ClawIntakeForTime(1.0));
+        chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -90,10 +99,12 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	  public void autonomousInit() {
-        //autonomousCommand = (Command) chooser.getSelected();
-    	//autonomousCommand = new TurnWithGyro(60.0);
+        autonomousCommand = (Command) chooser.getSelected();
+    	//autonomousCommand = new TurnWithGyro(90.0);
 		//autonomousCommand = new DriveForDistance(204.0);
-    	autonomousCommand = new LowBarSecondRobot();
+    	//autonomousCommand = new LowBarSecondRobot();
+		  //autonomousCommand = new DriveStraightForTime(0.5, 3.0);
+		  //autonomousCommand = new ClawArmMoveForXSeconds(0.5, -0.3);
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {

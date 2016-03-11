@@ -53,9 +53,9 @@ public class OI {
 		operatorYButton.whenPressed(new MoveLiftArmToHome());
 		operatorBButton.whenPressed(new MoveLiftArmToDown());
 
-		operatorAButton.whenPressed(new ClawIntake());
+		operatorAButton.whenPressed(new ClawOutput());
 		operatorAButton.whenReleased(new ClawIdle());
-		operatorXButton.whenPressed(new ClawOutput());
+		operatorXButton.whenPressed(new ClawIntake());
 		operatorXButton.whenReleased(new ClawIdle());
 	}
 	
