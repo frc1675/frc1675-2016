@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Suck", new ClawIntakeForTime(1.0));
         chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
 //        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+       
     }
 	
 	/**
@@ -116,7 +116,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-    	System.out.println("start auto");
+    	
 
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();

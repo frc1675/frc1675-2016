@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class ClawArm extends Subsystem {
 
@@ -48,12 +48,7 @@ public class ClawArm extends Subsystem {
 
 	public void moveArm(double speed) {
 
-		SmartDashboard.putBoolean("Top Claw Arm Limit Switch",
-				getLimitValueUp());
-		SmartDashboard.putBoolean("Bottom Claw Arm Limit Switch",
-				getLimitValueDown());
-		SmartDashboard.putNumber("Lift Arm Power", speed);
-
+		
 		double angle = armMotor.getPosition();
 
 		armMotor.changeControlMode(TalonControlMode.PercentVbus);
@@ -72,26 +67,14 @@ public class ClawArm extends Subsystem {
 	}
 
 	public void moveWithoutEncoder(double power) {
-		SmartDashboard.putNumber("Motor power sent to motor", power);
-		SmartDashboard.putBoolean("Top Claw Arm Limit Switch",
-				getLimitValueUp());
-		SmartDashboard.putBoolean("Bottom Claw Arm Limit Switch",
-				getLimitValueDown());
+		
 		moveWithinLimitSwitches(armMotor, power);
-		SmartDashboard.putNumber("Motor power received by motor",
-				armMotor.get());
+		
 	}
 
 	public void moveWithoutEncoderWithAcceleration(double power) {
-		SmartDashboard.putNumber("Motor power sent to motor", power);
-		SmartDashboard.putBoolean("Top Claw Arm Limit Switch",
-				getLimitValueUp());
-		SmartDashboard.putBoolean("Bottom Claw Arm Limit Switch",
-				getLimitValueDown());
-		SmartDashboard.putNumber("Encoder Value", armMotor.getPosition());
+		
 		moveWithinLimitSwitches(accelerationController, power);
-		SmartDashboard.putNumber("Motor power received by motor",
-				accelerationController.get());
 	}
 
 	private void moveWithinLimitSwitches(SpeedController sc, double power) {

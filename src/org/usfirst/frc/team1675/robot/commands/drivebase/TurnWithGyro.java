@@ -51,11 +51,11 @@ public class TurnWithGyro extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putNumber("Gyro Turn Setpoint", this.getSetpoint());
-    	SmartDashboard.putNumber("Gyro Turn Position", this.getPosition());
-    	SmartDashboard.putNumber("Gyro Turn Error", this.getPIDController().getError());
-    	SmartDashboard.putNumber("Gyro Turn Average Error", this.getPIDController().getAvgError());
-    	SmartDashboard.putBoolean("Gyro On Target", getPIDController().onTarget());
+    	//SmartDashboard.putNumber("Gyro Turn Setpoint", this.getSetpoint());
+    	//SmartDashboard.putNumber("Gyro Turn Position", this.getPosition());
+    	//SmartDashboard.putNumber("Gyro Turn Error", this.getPIDController().getError());
+    	//SmartDashboard.putNumber("Gyro Turn Average Error", this.getPIDController().getAvgError());
+    	//SmartDashboard.putBoolean("Gyro On Target", getPIDController().onTarget());
     	
     	
     	return getPIDController().onTarget();
@@ -80,8 +80,8 @@ public class TurnWithGyro extends PIDCommand {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		SmartDashboard.putNumber("Gyro Turn PIDOut", output);
-		SmartDashboard.putNumber("Gyro Angle", Robot.driveBase.getAngle());
+		//SmartDashboard.putNumber("Gyro Turn PIDOut", output);
+		//SmartDashboard.putNumber("Gyro Angle", Robot.driveBase.getAngle());
 		Robot.driveBase.setLeftMotorPower(output);
 		Robot.driveBase.setRightMotorPower(-output);
 		

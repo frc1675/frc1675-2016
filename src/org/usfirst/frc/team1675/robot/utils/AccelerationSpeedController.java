@@ -61,8 +61,6 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void set(double speed) {
 		double acceleratedSpeed = accelerate(speed);
-		// SmartDashboard.putNumber("AcceleratedValue: "+name,
-		// acceleratedSpeed);		
 		speedController.set(acceleratedSpeed);
 	}
 

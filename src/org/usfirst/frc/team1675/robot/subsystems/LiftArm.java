@@ -19,11 +19,11 @@ public class LiftArm extends Subsystem {
 	private DigitalInput downLimitSwitch;
 
 	public LiftArm() {
-		armMotor = new VictorSP(RobotMap.PWMChannels.EMPTY_PORT_ZERO);
+		armMotor = new VictorSP(RobotMap.PWMChannels.LIFTER_MOTOR);
 		armMotor.setInverted(true);
-		upLimitSwitch = new DigitalInput(RobotMap.DIOChannels.EMPTY_PORT_NINE);
+		upLimitSwitch = new DigitalInput(RobotMap.DIOChannels.LIFTER_UP_LIMIT_SWITCH);
 		downLimitSwitch = new DigitalInput(
-				RobotMap.DIOChannels.EMPTY_PORT_EIGHT);
+				RobotMap.DIOChannels.LIFTER_DOWN_LIMIT_SWITCH);
 	}
 
 	public boolean getLimitValueUp() {
@@ -35,9 +35,8 @@ public class LiftArm extends Subsystem {
 	}
 
 	public void moveArm(double power) {
-		SmartDashboard.putBoolean("Top Limit Switch", getLimitValueUp());
-		SmartDashboard.putBoolean("Bottom Limit Switch", getLimitValueDown());
-		SmartDashboard.putNumber("Lift Arm Power", power);
+		SmartDashboard.putBoolean("Lifter Up", getLimitValueUp());
+		SmartDashboard.putBoolean("Lifter Down", getLimitValueDown());
 
 		if (getLimitValueUp() == true) {
 			if (power < 0) {
