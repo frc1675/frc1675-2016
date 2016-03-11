@@ -10,15 +10,15 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightForTime extends Command {
 	
-	private double waitTime;
+	private double timeToWait;
 	private Timer waitTimer;
 	private double power;
 
-    public DriveStraightForTime(double power, double waitTime) {
+    public DriveStraightForTime(double power, double timeToWait) {
     	System.out.println("start drive straight");
     	requires(Robot.driveBase);
     	
-    	this.waitTime = waitTime;
+    	this.timeToWait = timeToWait;
     	waitTimer = new Timer();
     	
     	this.power = power;
@@ -39,7 +39,7 @@ public class DriveStraightForTime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(waitTimer.get() < waitTime){
+    	if(waitTimer.get() < timeToWait){
     		return false;
     	}else{
     		return true;
