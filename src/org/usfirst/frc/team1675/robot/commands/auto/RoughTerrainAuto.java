@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1675.robot.commands.auto;
 
+import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
@@ -29,8 +30,9 @@ public class RoughTerrainAuto extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential( new DriveForDistance( -24));
+    	addSequential( new DriveForDistance( -24, 3.0));
     	addSequential (new ClawArmMoveForXSeconds ( .4 , -.3));
-    	addSequential( new DriveStraightForTime(- .75 , 4.5));
+    	addSequential(new Wait(1.5));
+    	addSequential( new DriveStraightForTime(- .75 , 1.5));
     }
 }

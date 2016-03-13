@@ -36,6 +36,11 @@ public class TurnWithGyro extends PIDCommand {
         
     	
     }
+    
+    public TurnWithGyro(double degreesSetpoint, double timeout) {
+    	this(degreesSetpoint);
+    	this.setTimeout(timeout);
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -58,7 +63,7 @@ public class TurnWithGyro extends PIDCommand {
     	//SmartDashboard.putBoolean("Gyro On Target", getPIDController().onTarget());
     	
     	
-    	return getPIDController().onTarget();
+    	return isTimedOut() || getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true

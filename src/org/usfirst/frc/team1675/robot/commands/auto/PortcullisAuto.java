@@ -3,6 +3,7 @@ package org.usfirst.frc.team1675.robot.commands.auto;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
+import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
 import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
 import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 
@@ -15,10 +16,12 @@ public class PortcullisAuto extends CommandGroup {
     
     public  PortcullisAuto() {
     	
-    	addSequential(new DriveForDistance(24.0));
+    	addSequential(new DriveForDistance(-24.0));
     	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));//Lower claw arm here will go
     	addSequential(new MoveLiftArmToDown());
-    	addSequential(new DriveForDistance(84.0));
+    	//addSequential(new DriveForDistance(-96.0));
+    	addSequential(new DriveStraightForTime(-0.6, 2.0));
+    	addSequential(new DriveStraightForTime(0.3, 0.1));
     	addSequential(new MoveLiftArmToHome());
     	
     	

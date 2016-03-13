@@ -12,9 +12,11 @@ import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.subsystems.ClawArm;
 import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
+import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
+import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
@@ -72,6 +74,11 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Spit", new ClawOutputForTime(2.0));
         chooser.addObject("Suck", new ClawIntakeForTime(1.0));
         chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
+        chooser.addObject("Port", new PortcullisAuto());
+        chooser.addObject("French", new FrenchRampsAuto());
+        chooser.addObject("Rough", new RoughTerrainAuto());
+        SmartDashboard.putData("Auto mode", chooser);
+
 //        chooser.addObject("My Auto", new MyAutoCommand());
        
     }
