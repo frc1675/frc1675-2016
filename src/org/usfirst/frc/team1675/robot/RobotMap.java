@@ -44,6 +44,10 @@ public class RobotMap {
 		public static final double P = 0.01;
 		public static final double I = 0;
 		public static final double D = 0;
+		
+		public static final double SLOW_OUTPUT_POWER = -.2;
+		public static final double FULL_OUTPUT_POWER = -1.0;
+		public static final double FULL_INTAKE_POWER = 1.0;
 
 	}
 

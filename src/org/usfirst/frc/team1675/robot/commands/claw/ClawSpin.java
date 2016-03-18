@@ -7,10 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClawIntake extends Command {
+public class ClawSpin extends Command {
+	double motorSpeed;
 
-	public ClawIntake() {
-		// Use requires() here to declare subsystem dependencies
+	public ClawSpin() {
+		motorSpeed = 1.0;		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.clawSub);
+	}
+	
+	public ClawSpin(double power) {
+		motorSpeed = power;		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.clawSub);
 	}
@@ -21,7 +28,7 @@ public class ClawIntake extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.clawSub.setRollerInPower(1); // Set actual value later. 1 is a
+		Robot.clawSub.setRollerInPower(motorSpeed); // Set actual value later. 1 is a
 											// filler
 	}
 
