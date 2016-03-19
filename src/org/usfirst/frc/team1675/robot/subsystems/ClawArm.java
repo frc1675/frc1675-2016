@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ClawArm extends Subsystem {
@@ -78,13 +79,15 @@ public class ClawArm extends Subsystem {
 	}
 
 	private void moveWithinLimitSwitches(SpeedController sc, double power) {
-		if (getLimitValueUp() == true) {
+		//stuff wired wrong on practice robot fix for competition
+		power = -power;
+		if (getLimitValueDown() == true) {
 			if (power > 0) {
 				sc.set(power);
 			} else {
 				sc.set(0);
 			}
-		} else if (getLimitValueDown() == true) {
+		} else if (getLimitValueUp() == true) {
 			if (power < 0) {
 				sc.set(power);
 			} else {
