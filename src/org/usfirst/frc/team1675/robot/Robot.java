@@ -17,11 +17,13 @@ import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
+import org.usfirst.frc.team1675.robot.commands.auto.SirTurnsALot;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TurnForTime;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
@@ -78,7 +80,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("French", new FrenchRampsAuto());
         chooser.addObject("Rough", new RoughTerrainAuto());
         SmartDashboard.putData("Auto mode", chooser);
-
+        SmartDashboard.putString("george", "banana");
 //        chooser.addObject("My Auto", new MyAutoCommand());
        
     }
@@ -106,13 +108,14 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	  public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        //autonomousCommand = (Command) chooser.getSelected();
     	//autonomousCommand = new TurnWithGyro(90.0);
-		//autonomousCommand = new DriveForDistance(204.0);
-    	//autonomousCommand = new LowBarSecondRobot();
+//		autonomousCommand = new DriveForDistance(219.0);
+//    	autonomousCommand = new LowBarSecondRobot();
+		  //autonomousCommand = new TurnWithGyro(90.0);
 		  //autonomousCommand = new DriveStraightForTime(0.5, 3.0);
 		  //autonomousCommand = new ClawArmMoveForXSeconds(0.5, -0.3);
-        
+		  autonomousCommand = new LowBarScore();
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
