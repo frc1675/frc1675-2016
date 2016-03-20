@@ -16,6 +16,7 @@ import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
+import org.usfirst.frc.team1675.robot.commands.auto.RockWallAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
@@ -75,7 +76,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Suck", new ClawIntakeForTime(1.0));
         chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
         chooser.addObject("Port", new PortcullisAuto());
-        chooser.addObject("French", new FrenchRampsAuto());
+        chooser.addObject("Rock", new RockWallAuto());
         chooser.addObject("Rough", new RoughTerrainAuto());
         SmartDashboard.putData("Auto mode", chooser);
 
