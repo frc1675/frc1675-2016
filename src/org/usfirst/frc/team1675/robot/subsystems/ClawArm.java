@@ -106,6 +106,10 @@ public class ClawArm extends Subsystem {
 		return armMotor.getPosition();
 
 	}
+	
+	public void clearTheBucket() {
+		accelerationController.clearWhileDisabled();
+	}
 
 	public void stopAndDisable() {
 

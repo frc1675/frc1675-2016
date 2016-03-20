@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClawArmMoveForXSeconds extends Command {
 	private double clawControlTime;
 	private Timer clawControlTimer;
-	private double power;
+	protected double power;
 
 	public ClawArmMoveForXSeconds(double clawControlTime, double power) {
 		requires(Robot.clawArm);
@@ -47,4 +47,6 @@ public class ClawArmMoveForXSeconds extends Command {
 		this.end();
 
 	}
+
+
 }
