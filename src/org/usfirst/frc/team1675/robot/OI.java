@@ -49,9 +49,9 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
-		operatorYButton.whenPressed(new MoveLiftArmToHome());
-//		operatorBButton.whenPressed(new MoveLiftArmToDown());
-		operatorBButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.SLOW_OUTPUT_POWER));
+//		operatorYButton.whenPressed(new MoveLiftArmToHome());
+		operatorBButton.whenPressed(new MoveLiftArmToDown());
+		operatorYButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.SLOW_OUTPUT_POWER));
 		
 		operatorAButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_INTAKE_POWER));
 		operatorAButton.whenReleased(new ClawIdle());
