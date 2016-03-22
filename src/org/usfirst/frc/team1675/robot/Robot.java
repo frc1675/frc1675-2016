@@ -22,7 +22,6 @@ import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
-import org.usfirst.frc.team1675.robot.commands.drivebase.TurnForTime;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
