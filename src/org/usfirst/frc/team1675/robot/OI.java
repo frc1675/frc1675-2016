@@ -7,6 +7,7 @@ import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutput;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
+import org.usfirst.frc.team1675.robot.commands.drivebase.SwitchDriveMode;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
 import org.usfirst.frc.team1675.robot.utils.TriggerButton;
 
@@ -50,6 +51,10 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
+		driverYButton.whenPressed(new SwitchDriveMode());
+		driverYButton.whenReleased(new SwitchDriveMode());
+//		driverXButton.whenPressed(new SwitchDriveMode());
+		
 		operatorYButton.whenPressed(new MoveLiftArmToHome());
 		operatorBButton.whenPressed(new MoveLiftArmToDown());
 
