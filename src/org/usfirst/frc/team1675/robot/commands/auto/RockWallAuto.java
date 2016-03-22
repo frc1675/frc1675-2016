@@ -13,11 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RockWallAuto extends CommandGroup {
     
     public  RockWallAuto() {
-    	//Not yet tested! for real never
         addSequential(new DriveStraightForTime(1.0, 1.0));
         //addParallel(new DriveStraightForTime(1.0, 2.0));
-        addSequential(new Wait(2.0));
-      addSequential(new ClawArmMoveForXSeconds(1.25, -1.0));
+      addSequential(new ClawArmMoveForXSeconds(.5, -.5));
        // addSequential(new MoveClawArmWithAcceleration(0.4, -0.3));
        // addSequential(new DriveStraightForTime(-0.3, 0.25));    	
     	
