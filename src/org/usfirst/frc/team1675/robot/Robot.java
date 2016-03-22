@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("Rock", new RockWallAuto());
         chooser.addObject("Rough", new RoughTerrainAuto());
         SmartDashboard.putData("Auto mode", chooser);
-
+        SmartDashboard.putString("george", "banana");
 //        chooser.addObject("My Auto", new MyAutoCommand());
        
     }
@@ -107,13 +107,16 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	  public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+//        autonomousCommand = (Command) chooser.getSelected();
     	//autonomousCommand = new TurnWithGyro(90.0);
-		//autonomousCommand = new DriveForDistance(204.0);
-    	//autonomousCommand = new LowBarSecondRobot();
+//		autonomousCommand = new DriveForDistance(219.0);
+//    	autonomousCommand = new LowBarSecondRobot();
+		  //autonomousCommand = new TurnWithGyro(90.0);
 		  //autonomousCommand = new DriveStraightForTime(0.5, 3.0);
 		  //autonomousCommand = new ClawArmMoveForXSeconds(0.5, -0.3);
-        
+		 // autonomousCommand = new DriveFOrDistanceAndReportDisplacement(60.0);
+		  autonomousCommand = new LowBarScore();
+		  //autonomousCommand = new FrenchRampsAuto();
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
