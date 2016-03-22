@@ -53,9 +53,9 @@ public class OI {
 		operatorBButton.whenPressed(new MoveLiftArmToDown());
 		operatorYButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.SLOW_OUTPUT_POWER));
 		
-		operatorAButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_INTAKE_POWER));
+		operatorAButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_OUTPUT_POWER));
 		operatorAButton.whenReleased(new ClawIdle());
-		operatorXButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_OUTPUT_POWER));
+		operatorXButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_INTAKE_POWER));
 		operatorXButton.whenReleased(new ClawIdle());
 	}
 	
