@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 	static{
 		try{
 			driveBase = new DriveBase();
-			clawSub = new ClawSubSystem();
+			clawSub = new ClawSubSystem(false); //false for practice robot, true for competition robot
 			clawArm = new ClawArm();
 			liftArm = new LiftArm();
 			vision = new Vision();
