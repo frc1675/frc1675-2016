@@ -110,7 +110,8 @@ public class DriveBase extends Subsystem {
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new TankDrive());
+//		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new CheeseDrive());
 	}
 
 	public int getEncPosition() {

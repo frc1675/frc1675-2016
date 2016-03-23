@@ -1,32 +1,35 @@
 package org.usfirst.frc.team1675.robot.commands.auto;
 
 import org.usfirst.frc.team1675.robot.commands.Wait;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
-import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
+import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LowBarScore extends CommandGroup {
+public class PortcullisAuto extends CommandGroup {
     
-    public  LowBarScore() {
+    public  PortcullisAuto() {
     	
-    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
-    	addSequential(new Wait(1.5));
-    	addSequential(new DriveForDistance(219.0, 4.5));
-    	addSequential(new TurnWithGyro(55.0, 2.5));
-    	addSequential(new DriveForDistance(116.0, 4.0));
-    	addSequential(new ClawOutputForTime(2.0));
-    	addSequential(new ClawIntakeForTime(1.0));
-    	addSequential(new ClawOutputForTime(1.0));
-
+    	addSequential(new DriveForDistance(-24.0));
+    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));//Lower claw arm here will go
+    	addSequential(new MoveLiftArmToDown());
+    	//addSequential(new DriveForDistance(-96.0));
+    	addSequential(new DriveStraightForTime(-0.6, 2.0));
+    	addSequential(new DriveStraightForTime(0.3, 0.1));
+    	addSequential(new MoveLiftArmToHome());
     	
+    	
+//    	addSequential(new Wait(1.5));
+//    	addSequential(new MoveLiftArmToDown());
+//    	addSequential(new DriveForDistance(-60.0));
+//    	addParallel(new MoveLiftArmToHome());
+//    	addSequential(new DriveForDistance(-80.0));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

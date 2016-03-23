@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ClawArm extends Subsystem {
@@ -30,7 +31,7 @@ public class ClawArm extends Subsystem {
 				RobotMap.ArmConstants.D);
 
 		armMotor.changeControlMode(TalonControlMode.PercentVbus);
-		armMotor.setInverted(true);
+		armMotor.setInverted(false);
 		upLimitSwitch = new DigitalInput(
 				RobotMap.DIOChannels.ARM_UP_LIMIT_SWITCH);
 		downLimitSwitch = new DigitalInput(
@@ -78,14 +79,16 @@ public class ClawArm extends Subsystem {
 	}
 
 	private void moveWithinLimitSwitches(SpeedController sc, double power) {
-		if (getLimitValueUp() == true) {
-			if (power < 0) {
+		//stuff wired wrong on practice robot fix for competition
+		power = -power;
+		if (getLimitValueDown() == true) {
+			if (power > 0) {
 				sc.set(power);
 			} else {
 				sc.set(0);
 			}
-		} else if (getLimitValueDown() == true) {
-			if (power > 0) {
+		} else if (getLimitValueUp() == true) {
+			if (power < 0) {
 				sc.set(power);
 			} else {
 				sc.set(0);
@@ -105,6 +108,10 @@ public class ClawArm extends Subsystem {
 	public double getPosition() {
 		return armMotor.getPosition();
 
+	}
+	
+	public void clearTheBucket() {
+		accelerationController.clearWhileDisabled();
 	}
 
 	public void stopAndDisable() {

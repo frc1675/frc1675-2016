@@ -1,11 +1,8 @@
 package org.usfirst.frc.team1675.robot.commands.auto;
 
 import org.usfirst.frc.team1675.robot.commands.Wait;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
-import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -13,21 +10,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LowBarScore extends CommandGroup {
+public class LowBarSecondRobot extends CommandGroup {
     
-    public  LowBarScore() {
+    public  LowBarSecondRobot() {
+        
+    	addSequential(new Wait(6.0));
+    	addSequential(new DriveForDistance(-72.0));
+    	addSequential(new ClawArmMoveForXSeconds(1, -0.3));
+    	addSequential(new TurnWithGyro(65.0));
+    	addSequential(new DriveForDistance(-144.0));
     	
-    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
-    	addSequential(new Wait(1.5));
-    	addSequential(new DriveForDistance(219.0, 4.5));
-    	addSequential(new TurnWithGyro(55.0, 2.5));
-    	addSequential(new DriveForDistance(116.0, 4.0));
-    	addSequential(new ClawOutputForTime(2.0));
-    	addSequential(new ClawIntakeForTime(1.0));
-    	addSequential(new ClawOutputForTime(1.0));
-
     	
-        // Add Commands here:
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

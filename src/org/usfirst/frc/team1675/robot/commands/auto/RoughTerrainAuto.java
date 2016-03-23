@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1675.robot.commands.auto;
 
 import org.usfirst.frc.team1675.robot.commands.Wait;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
@@ -13,20 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LowBarScore extends CommandGroup {
+public class RoughTerrainAuto extends CommandGroup {
     
-    public  LowBarScore() {
-    	
-    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
-    	addSequential(new Wait(1.5));
-    	addSequential(new DriveForDistance(219.0, 4.5));
-    	addSequential(new TurnWithGyro(55.0, 2.5));
-    	addSequential(new DriveForDistance(116.0, 4.0));
-    	addSequential(new ClawOutputForTime(2.0));
-    	addSequential(new ClawIntakeForTime(1.0));
-    	addSequential(new ClawOutputForTime(1.0));
-
-    	
+    public  RoughTerrainAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -43,5 +30,9 @@ public class LowBarScore extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential( new DriveForDistance( -24, 3.0));
+    	addSequential (new ClawArmMoveForXSeconds ( .4 , -.3));
+    	addSequential(new Wait(1.5));
+    	addSequential( new DriveStraightForTime(- .75 , 1.5));
     }
 }
