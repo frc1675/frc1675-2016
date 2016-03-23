@@ -25,6 +25,7 @@ import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TurnForTime;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
+import org.usfirst.frc.team1675.robot.utils.AutoChooser;
 import org.usfirst.frc.team1675.robot.utils.Zamboni;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -62,6 +63,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;   
+    AutoChooser autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -69,16 +71,17 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();	
-        chooser = new SendableChooser();
-        chooser.addObject("Low Bar Score", new LowBarScore());
-        chooser.addObject("Just Drop Claw", new ClawArmMoveForXSeconds(0.5, -0.3));
-        chooser.addObject("Spit", new ClawOutputForTime(2.0));
-        chooser.addObject("Suck", new ClawIntakeForTime(1.0));
-        chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
-        chooser.addObject("Port", new PortcullisAuto());
-        chooser.addObject("French", new FrenchRampsAuto());
-        chooser.addObject("Rough", new RoughTerrainAuto());
-        SmartDashboard.putData("Auto mode", chooser);
+		autoChooser = new AutoChooser();
+//        chooser = new SendableChooser();
+//        chooser.addObject("Low Bar Score", new LowBarScore());
+//        chooser.addObject("Just Drop Claw", new ClawArmMoveForXSeconds(0.5, -0.3));
+//        chooser.addObject("Spit", new ClawOutputForTime(2.0));
+//        chooser.addObject("Suck", new ClawIntakeForTime(1.0));
+//        chooser.addObject("Timeout Test", new DriveForDistance(300.0, 1.0));
+//        chooser.addObject("Port", new PortcullisAuto());
+//        chooser.addObject("French", new FrenchRampsAuto());
+//        chooser.addObject("Rough", new RoughTerrainAuto());
+//        SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putString("george", "banana");
 //        chooser.addObject("My Auto", new MyAutoCommand());
        
@@ -107,6 +110,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	  public void autonomousInit() {
+		  autonomousCommand = autoChooser.generateAuto();
 //        autonomousCommand = (Command) chooser.getSelected();
     	//autonomousCommand = new TurnWithGyro(90.0);
 //		autonomousCommand = new DriveForDistance(219.0);
@@ -115,7 +119,7 @@ public class Robot extends IterativeRobot {
 		  //autonomousCommand = new DriveStraightForTime(0.5, 3.0);
 		  //autonomousCommand = new ClawArmMoveForXSeconds(0.5, -0.3);
 		 // autonomousCommand = new DriveFOrDistanceAndReportDisplacement(60.0);
-		  autonomousCommand = new LowBarScore();
+		  //autonomousCommand = new LowBarScore();
 		  //autonomousCommand = new FrenchRampsAuto();
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
