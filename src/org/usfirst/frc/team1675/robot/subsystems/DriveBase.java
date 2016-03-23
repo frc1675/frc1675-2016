@@ -130,7 +130,7 @@ public class DriveBase extends Subsystem {
 			new TankDrive().start(); //TODO setDefaultCommand()
 		}else{
 			inCheeseDrive = true;
-			setDefaultCommand(new CheeseDrive);
+			setDefaultCommand(new CheeseDrive());
 			new CheeseDrive().start(); //TODO setDefaultCommand()
 		}
 	}
