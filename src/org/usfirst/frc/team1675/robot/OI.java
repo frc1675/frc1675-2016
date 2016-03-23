@@ -51,8 +51,8 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
-		driverYButton.whenPressed(new SwitchDriveMode());
-		driverYButton.whenReleased(new SwitchDriveMode());
+		driverRightBumper.whenPressed(new SwitchDriveMode());
+		driverRightBumper.whenReleased(new SwitchDriveMode());
 //		driverXButton.whenPressed(new SwitchDriveMode());
 		
 		operatorYButton.whenPressed(new MoveLiftArmToHome());
