@@ -22,7 +22,7 @@ public class ClawArm extends Subsystem {
 
 	// Visibility (private) Type (SpeedController) Name (armMotor)
 
-	public ClawArm() {
+	public ClawArm(boolean isInverted) {
 		armMotor = new CANTalon(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
 		accelerationController = new AccelerationSpeedController(armMotor,
 				0.10, 160);
@@ -36,6 +36,7 @@ public class ClawArm extends Subsystem {
 				RobotMap.DIOChannels.ARM_UP_LIMIT_SWITCH);
 		downLimitSwitch = new DigitalInput(
 				RobotMap.DIOChannels.ARM_DOWN_LIMIT_SWITCH);
+		armMotor.setInverted(isInverted);
 	}
 
 	public boolean getLimitValueUp() {
@@ -80,22 +81,40 @@ public class ClawArm extends Subsystem {
 
 	private void moveWithinLimitSwitches(SpeedController sc, double power) {
 		//stuff wired wrong on practice robot fix for competition
-		power = -power;
-		if (getLimitValueDown() == true) {
-			if (power > 0) {
-				sc.set(power);
+		if(sc.getInverted()==true){
+			if (getLimitValueDown() == true) {
+				if (power < 0) {
+					sc.set(power);
+				} else {
+					sc.set(0);
+				}
+			} else if (getLimitValueUp() == true) {
+				if (power > 0) {
+					sc.set(power);
+				} else {
+					sc.set(0);
+				}
+	
 			} else {
-				sc.set(0);
-			}
-		} else if (getLimitValueUp() == true) {
-			if (power < 0) {
 				sc.set(power);
-			} else {
-				sc.set(0);
 			}
-
-		} else {
-			sc.set(power);
+		}else if(sc.getInverted()==false){
+			if (getLimitValueDown() == true) {
+				if (power > 0) {
+					sc.set(power);
+				} else {
+					sc.set(0);
+				}
+			} else if (getLimitValueUp() == true) {
+				if (power < 0) {
+					sc.set(power);
+				} else {
+					sc.set(0);
+				}
+	
+			} else {
+				sc.set(power);
+			}
 		}
 	}
 

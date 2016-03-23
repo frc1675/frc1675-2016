@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 		try{
 			driveBase = new DriveBase();
 			clawSub = new ClawSubSystem(false); //false for practice robot, true for competition robot
-			clawArm = new ClawArm();
+			clawArm = new ClawArm(true); // true for practice robot, false for competition robot
 			liftArm = new LiftArm();
 			vision = new Vision();
 		}catch(Exception e){
