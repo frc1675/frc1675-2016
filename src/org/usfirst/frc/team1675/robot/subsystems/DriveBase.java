@@ -31,6 +31,8 @@ public class DriveBase extends Subsystem {
 	private SpeedController rightBack;
 
 	private AHRS ahrs;
+	
+	private boolean inCheeseDrive;
 
 	public DriveBase() {
 		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
@@ -41,6 +43,8 @@ public class DriveBase extends Subsystem {
 		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 
 		ahrs = new AHRS(SerialPort.Port.kMXP);
+		
+		inCheeseDrive = true;
 	}
 
 	// sets all of the motor powers on the left side
@@ -117,5 +121,17 @@ public class DriveBase extends Subsystem {
 	public int getEncPosition() {
 		// On practice bot only right side encoder works.
 		return rightMid.getEncPosition();
+	}
+	
+	public void changeDriveMode(){
+		if(inCheeseDrive){
+			inCheeseDrive = false;
+			setDefaultCommand(new TankDrive());
+			new TankDrive().start();
+		}else{
+			inCheeseDrive = true;
+			setDefaultCommand(new CheeseDrive());
+			new CheeseDrive().start();
+		}
 	}
 }
