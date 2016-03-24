@@ -27,8 +27,8 @@ public class RobotMap {
 	}
 
 	public static class DIOChannels {
-		public static final int ARM_DOWN_LIMIT_SWITCH = 6;
-		public static final int ARM_UP_LIMIT_SWITCH = 7;
+		public static final int ARM_DOWN_LIMIT_SWITCH = 7;
+		public static final int ARM_UP_LIMIT_SWITCH = 6;
 		public static final int LIFTER_DOWN_LIMIT_SWITCH = 8;
 		public static final int LIFTER_UP_LIMIT_SWITCH = 9;
 

@@ -98,7 +98,8 @@ public class ClawArm extends Subsystem {
 			} else {
 				sc.set(power);
 			}
-		}else if(sc.getInverted()==false){
+		}
+		else if(sc.getInverted()==false){
 			if (getLimitValueDown() == true) {
 				if (power > 0) {
 					sc.set(power);
