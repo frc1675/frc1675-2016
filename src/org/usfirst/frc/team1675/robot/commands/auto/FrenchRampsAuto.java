@@ -21,5 +21,5 @@ public class FrenchRampsAuto extends CommandGroup {
     	addSequential(new DriveStraightForTime(-.3, .1));
 
        
-    }
+   }
 }

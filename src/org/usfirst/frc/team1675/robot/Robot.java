@@ -16,13 +16,13 @@ import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
+import org.usfirst.frc.team1675.robot.commands.auto.RockWallAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIntakeForTime;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawOutputForTime;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
 import org.usfirst.frc.team1675.robot.commands.drivebase.DriveStraightForTime;
-import org.usfirst.frc.team1675.robot.commands.drivebase.TurnForTime;
 import org.usfirst.frc.team1675.robot.subsystems.DriveBase;
 import org.usfirst.frc.team1675.robot.subsystems.LiftArm;
 import org.usfirst.frc.team1675.robot.utils.AutoChooser;
@@ -49,8 +49,8 @@ public class Robot extends IterativeRobot {
 	static{
 		try{
 			driveBase = new DriveBase();
-			clawSub = new ClawSubSystem();
-			clawArm = new ClawArm();
+			clawSub = new ClawSubSystem(false); //false for practice robot, true for competition robot
+			clawArm = new ClawArm(true); // true for practice robot, false for competition robot
 			liftArm = new LiftArm();
 			vision = new Vision();
 		}catch(Exception e){

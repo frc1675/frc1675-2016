@@ -4,8 +4,7 @@ import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToDown;
 import org.usfirst.frc.team1675.robot.commands.liftarm.MoveLiftArmToHome;
 import org.usfirst.frc.team1675.robot.commands.Wait;
 import org.usfirst.frc.team1675.robot.commands.claw.ClawIdle;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawIntake;
-import org.usfirst.frc.team1675.robot.commands.claw.ClawOutput;
+import org.usfirst.frc.team1675.robot.commands.claw.ClawSpin;
 import org.usfirst.frc.team1675.robot.commands.clawarm.ClawArmMoveForXSeconds;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
 import org.usfirst.frc.team1675.robot.utils.DPadButton;
@@ -51,13 +50,11 @@ public class OI {
 	private TriggerButton operatorLeftTrigger = new TriggerButton(operatorController, false, RobotMap.DriverConstants.TRIGGER_DEAD_ZONE);
 
 	public OI(){
-		
-		operatorYButton.whenPressed(new MoveLiftArmToHome());
-		operatorBButton.whenPressed(new MoveLiftArmToDown());
-
-		operatorAButton.whenPressed(new ClawOutput());
+		operatorYButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.SLOW_OUTPUT_POWER));
+		operatorYButton.whenReleased(new ClawIdle());
+		operatorAButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_OUTPUT_POWER));
 		operatorAButton.whenReleased(new ClawIdle());
-		operatorXButton.whenPressed(new ClawIntake());
+		operatorXButton.whenPressed(new ClawSpin(RobotMap.ArmConstants.FULL_INTAKE_POWER));
 		operatorXButton.whenReleased(new ClawIdle());
 	}
 	
