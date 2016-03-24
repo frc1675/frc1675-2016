@@ -14,6 +14,6 @@ public class LowBarCross extends CommandGroup {
     public  LowBarCross() {
     	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
     	addSequential(new Wait(1.5));
-    	//addSequential(new DriveForDistance(138.0, 3.0));
+    	addSequential(new DriveForDistance(138.0, 3.0));
     }
 }

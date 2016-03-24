@@ -20,7 +20,7 @@ public class AutoChooser {
 	private SendableChooser afterScoreChooser;
 	
 	public enum Defense {
-		LOW_BAR,
+		LOW_BAR_STOP,
 		CDF,
 		PORTCULLIS,
 		ROCK_WALL,
@@ -70,7 +70,7 @@ public class AutoChooser {
 		positionChooser = new SendableChooser();
 		afterCrossChooser = new SendableChooser();
 		
-		defenseChooser.addObject("Low Bar", Defense.LOW_BAR);
+		defenseChooser.addObject("Low Bar and Stop", Defense.LOW_BAR_STOP);
 		defenseChooser.addObject("Shovel Fries", Defense.CDF);
 		defenseChooser.addObject("Portcullis", Defense.PORTCULLIS);
 		defenseChooser.addObject("Rock Wall", Defense.ROCK_WALL);
@@ -115,7 +115,7 @@ public class AutoChooser {
 		
 		boolean robotBackwards = false;
 		switch(selectedDefense){
-		case LOW_BAR:
+		case LOW_BAR_STOP:
 			robotBackwards = false;
 			auto.addSequential(new LowBarCross());
 			break;
@@ -148,7 +148,9 @@ public class AutoChooser {
 		switch(selectedAfterCross){
 		case DRIVE_LEFT:
 		case SCORE_LEFT:
-			if(robotBackwards){
+			if(selectedDefense == Defense.LOW_BAR_STOP){
+				//do nothing
+			} else if(robotBackwards){
 				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.LEFT_BACKWARDS);
 			} else {
 				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.LEFT_FORWARDS);
@@ -156,7 +158,9 @@ public class AutoChooser {
 			break;
 		case DRIVE_RIGHT:
 		case SCORE_RIGHT:
-			if(robotBackwards){
+			if(selectedDefense == Defense.LOW_BAR_STOP){
+				//are do nothing
+			} else if(robotBackwards){
 				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.RIGHT_BACKWARDS);
 			} else {
 				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.RIGHT_FORWARDS);
