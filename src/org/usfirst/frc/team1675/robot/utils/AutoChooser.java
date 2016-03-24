@@ -66,6 +66,9 @@ public class AutoChooser {
 		//make and fill in choosers with enums
 		
 		//put choosers on smart dashboard
+		defenseChooser = new SendableChooser();
+		positionChooser = new SendableChooser();
+		afterCrossChooser = new SendableChooser();
 		
 		defenseChooser.addObject("Low Bar", Defense.LOW_BAR);
 		defenseChooser.addObject("Shovel Fries", Defense.CDF);
@@ -85,13 +88,13 @@ public class AutoChooser {
 		afterCrossChooser.addObject("Drive Left", AfterCrossChoice.DRIVE_LEFT);
 		afterCrossChooser.addObject("Drive Right", AfterCrossChoice.DRIVE_RIGHT);
 		
-		afterScoreChooser.addObject("Nothing", AfterScore.NOTHING);
-		afterScoreChooser.addObject("Spit Suck", AfterScore.SPIT_SUCK);
-		afterScoreChooser.addObject("Drive To 1", AfterScore.DRIVE_TO_1);
-		afterScoreChooser.addObject("Drive To 2", AfterScore.DRIVE_TO_2);
-		afterScoreChooser.addObject("Drive To 3", AfterScore.DRIVE_TO_3);
-		afterScoreChooser.addObject("Drive To 4", AfterScore.DRIVE_TO_4);
-		afterScoreChooser.addObject("Drive To 5", AfterScore.DRIVE_TO_5);
+//		afterScoreChooser.addObject("Nothing", AfterScore.NOTHING);
+//		afterScoreChooser.addObject("Spit Suck", AfterScore.SPIT_SUCK);
+//		afterScoreChooser.addObject("Drive To 1", AfterScore.DRIVE_TO_1);
+//		afterScoreChooser.addObject("Drive To 2", AfterScore.DRIVE_TO_2);
+//		afterScoreChooser.addObject("Drive To 3", AfterScore.DRIVE_TO_3);
+//		afterScoreChooser.addObject("Drive To 4", AfterScore.DRIVE_TO_4);
+//		afterScoreChooser.addObject("Drive To 5", AfterScore.DRIVE_TO_5);
 		
 		SmartDashboard.putData("Defense", defenseChooser);
 		SmartDashboard.putData("Position", positionChooser);
