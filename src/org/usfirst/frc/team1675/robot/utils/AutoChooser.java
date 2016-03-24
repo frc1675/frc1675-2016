@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1675.robot.utils;
 
 import org.usfirst.frc.team1675.robot.commands.auto.AfterCrossProfile;
+import org.usfirst.frc.team1675.robot.commands.auto.DriveWhileSpit;
 import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarCross;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
@@ -69,6 +70,7 @@ public class AutoChooser {
 		defenseChooser = new SendableChooser();
 		positionChooser = new SendableChooser();
 		afterCrossChooser = new SendableChooser();
+//		afterScoreChooser = new SendableChooser();
 		
 		defenseChooser.addObject("Low Bar and Stop", Defense.LOW_BAR_STOP);
 		defenseChooser.addObject("Shovel Fries", Defense.CDF);
@@ -144,9 +146,10 @@ public class AutoChooser {
 		AfterCrossChoice selectedAfterCross = (AfterCrossChoice) afterCrossChooser.getSelected();
 		
 		AutoProfiles.AutoProfile profile = null;
-		
+		boolean scoreAfterMove = true;
 		switch(selectedAfterCross){
 		case DRIVE_LEFT:
+			scoreAfterMove = false;
 		case SCORE_LEFT:
 			if(selectedDefense == Defense.LOW_BAR_STOP){
 				//do nothing
@@ -157,6 +160,7 @@ public class AutoChooser {
 			}
 			break;
 		case DRIVE_RIGHT:
+			scoreAfterMove = false;
 		case SCORE_RIGHT:
 			if(selectedDefense == Defense.LOW_BAR_STOP){
 				//are do nothing
@@ -177,6 +181,11 @@ public class AutoChooser {
 					profile.x3, 
 					profile.angle1, 
 					profile.angle2));
+			
+			//only add a score if we moved anyway
+			if(scoreAfterMove){
+				auto.addSequential(new DriveWhileSpit(24.0, 2.0));
+			}
 		}
 		
 		return auto;
