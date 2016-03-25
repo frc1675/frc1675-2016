@@ -16,7 +16,7 @@ public class PortcullisAuto extends CommandGroup {
     
     public  PortcullisAuto() {
     	
-    	addSequential(new DriveForDistance(-24.0));
+    	addSequential(new DriveForDistance(-24.0, 1.0));
     	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));//Lower claw arm here will go
     	addSequential(new MoveLiftArmToDown());
     	//addSequential(new DriveForDistance(-96.0));

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FrenchRampsAuto extends CommandGroup {
     
     public  FrenchRampsAuto() {
-    	addSequential(new DriveForDistance(45));
+    	addSequential(new DriveForDistance(49));
     	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
     	addSequential(new Wait(1.5));
     	addSequential(new DriveStraightForTime(1.0, .75));
