@@ -15,7 +15,7 @@ public class DriveWhileSpit extends CommandGroup {
     	//uses same logic from DriveThenDriveWhileShootingAuto branch
 //        addParallel(new DriveForDistance(inches, timeout));
 //        addSequential(new ClawOutputForTime(timeout));
-    	addParallel(new DriveStraightForTime(.75, .25));
-    	addSequential(new ClawOutputForTime(.75));
+    	addParallel(new DriveStraightForTime(.75, .5));
+    	addSequential(new ClawOutputForTime(1.0));
     }
 }

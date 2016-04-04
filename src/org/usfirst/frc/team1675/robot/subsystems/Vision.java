@@ -25,5 +25,3 @@ public class Vision extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 }
-
-//ayy lmao
