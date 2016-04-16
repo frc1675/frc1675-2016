@@ -31,7 +31,6 @@ public class ClawArm extends Subsystem {
 				RobotMap.ArmConstants.D);
 
 		armMotor.changeControlMode(TalonControlMode.PercentVbus);
-		armMotor.setInverted(false);
 		upLimitSwitch = new DigitalInput(
 				RobotMap.DIOChannels.ARM_UP_LIMIT_SWITCH);
 		downLimitSwitch = new DigitalInput(
@@ -81,41 +80,20 @@ public class ClawArm extends Subsystem {
 
 	private void moveWithinLimitSwitches(SpeedController sc, double power) {
 		//stuff wired wrong on practice robot fix for competition
-		if(sc.getInverted()==true){
-			if (getLimitValueDown() == true) {
-				if (power < 0) {
-					sc.set(power);
-				} else {
-					sc.set(0);
-				}
-			} else if (getLimitValueUp() == true) {
-				if (power > 0) {
-					sc.set(power);
-				} else {
-					sc.set(0);
-				}
-	
-			} else {
+		if (getLimitValueUp() == true) {
+			if (power < 0) {
 				sc.set(power);
-			}
-		}
-		else if(sc.getInverted()==false){
-			if (getLimitValueDown() == true) {
-				if (power > 0) {
-					sc.set(power);
-				} else {
-					sc.set(0);
-				}
-			} else if (getLimitValueUp() == true) {
-				if (power < 0) {
-					sc.set(power);
-				} else {
-					sc.set(0);
-				}
-	
 			} else {
-				sc.set(power);
+				sc.set(0);
 			}
+		} else if (getLimitValueDown() == true) {
+			if (power > 0) {
+				sc.set(power);
+			} else {
+				sc.set(0);
+			}
+		} else {
+			sc.set(power);
 		}
 	}
 
