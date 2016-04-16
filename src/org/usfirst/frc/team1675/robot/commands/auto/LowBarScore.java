@@ -17,7 +17,7 @@ public class LowBarScore extends CommandGroup {
     
     public  LowBarScore() {
     	
-    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.3));
+    	addSequential(new ClawArmMoveForXSeconds(0.4, -0.4));
     	addSequential(new Wait(1.5));
     	addSequential(new DriveForDistance(219.0, 4.5));
     	addSequential(new TurnWithGyro(55.0, 2.5));
