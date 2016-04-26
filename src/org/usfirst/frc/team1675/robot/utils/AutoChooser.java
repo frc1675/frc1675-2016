@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1675.robot.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usfirst.frc.team1675.robot.commands.auto.AfterCrossProfile;
 import org.usfirst.frc.team1675.robot.commands.auto.DriveWhileSpit;
 import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
@@ -8,6 +11,9 @@ import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RockWallAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
+import org.usfirst.frc.team1675.robot.commands.drivebase.DriveForDistance;
+import org.usfirst.frc.team1675.robot.commands.drivebase.TurnWithGyro;
+import org.usfirst.frc.team1675.robot.utils.PathPoint.Heading;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,6 +25,9 @@ public class AutoChooser {
 	private SendableChooser positionChooser;
 	private SendableChooser afterCrossChooser;
 	private SendableChooser afterScoreChooser;
+	
+	private List<PathPoint> pointList;
+	private List<Directive> directives;
 	
 	public enum Defense {
 		LOW_BAR_STOP,
@@ -61,8 +70,6 @@ public class AutoChooser {
 		DRIVE_TO_5
 	}
 	
-	private AutoProfiles profiles = new AutoProfiles();
-	
 	public AutoChooser(){
 		//make and fill in choosers with enums
 		
@@ -71,6 +78,7 @@ public class AutoChooser {
 		positionChooser = new SendableChooser();
 		afterCrossChooser = new SendableChooser();
 //		afterScoreChooser = new SendableChooser();
+		pointList = new ArrayList<PathPoint>();
 		
 		defenseChooser.addObject("Low Bar and Stop", Defense.LOW_BAR_STOP);
 		defenseChooser.addObject("Shovel Fries", Defense.CDF);
@@ -108,6 +116,13 @@ public class AutoChooser {
 		CommandGroup auto = new CommandGroup();
 		
 		Defense selectedDefense = (Defense) defenseChooser.getSelected();
+		Position selectedPosition = (Position) positionChooser.getSelected();
+		AfterCrossChoice selectedAfterCross = (AfterCrossChoice) afterCrossChooser.getSelected();
+		
+		Heading robotHeading;
+		double defenseXDisplacement;
+		double defenseYDisplacement;
+		boolean scoreAfterMove;
 		
 		//EARLY EXIT - IF WE CHOOSE LOW BAR SCORE JUST DO THE OLDIE
 		if(selectedDefense == Defense.LOW_BAR_SCORE){
@@ -115,26 +130,36 @@ public class AutoChooser {
 			return auto;
 		}
 		
-		boolean robotBackwards = false;
 		switch(selectedDefense){
 		case LOW_BAR_STOP:
-			robotBackwards = false;
-			auto.addSequential(new LowBarCross());
+			robotHeading = Heading.FORWARDS;
+			defenseXDisplacement = -21.9375;
+			defenseYDisplacement = 0;
 			break;
 		case CDF:
-			robotBackwards = false;
+			robotHeading = Heading.FORWARDS;
+			defenseXDisplacement = 6.25;
+			defenseYDisplacement = 22;
 			auto.addSequential(new FrenchRampsAuto());
 			break;
 		case PORTCULLIS:
-			robotBackwards = true;
+			robotHeading = Heading.BACKWARDS;
+			defenseXDisplacement = 0;
+			//Y displacement is placeholder
+			defenseYDisplacement = 22;
 			auto.addSequential(new PortcullisAuto());
 			break;
 		case ROCK_WALL:
-			robotBackwards = false;
+			robotHeading = Heading.FORWARDS;
+			defenseXDisplacement = 0;
+			//Y displacement is placeholder
+			defenseYDisplacement = 48;
 			auto.addSequential(new RockWallAuto());
 			break;
 		case ROUGH_TERRAIN:
-			robotBackwards = true;
+			robotHeading = Heading.BACKWARDS;
+			defenseXDisplacement = 0;
+			defenseYDisplacement = 48;
 			auto.addSequential(new RoughTerrainAuto());
 			break;
 		default:
@@ -142,50 +167,59 @@ public class AutoChooser {
 			return auto;
 		}
 		
-		Position selectedPosition = (Position) positionChooser.getSelected();
-		AfterCrossChoice selectedAfterCross = (AfterCrossChoice) afterCrossChooser.getSelected();
+		switch(selectedPosition){
+		case TWO:
+			pointList.add(new PathPoint(-78.8125 + defenseXDisplacement, defenseYDisplacement, robotHeading));
+			break;
+		case THREE:
+			pointList.add(new PathPoint(-28.4375 + defenseXDisplacement, defenseYDisplacement, robotHeading));
+			break;
+		case FOUR:
+			pointList.add(new PathPoint(21.9375 + defenseXDisplacement, defenseYDisplacement, robotHeading));
+			break;
+		case FIVE:
+			pointList.add(new PathPoint(72.3125 + defenseXDisplacement, defenseYDisplacement, robotHeading));
+			break;
+		default:
+			return auto;
+		}
 		
-		AutoProfiles.AutoProfile profile = null;
-		boolean scoreAfterMove = true;
+		scoreAfterMove = true;
+		
 		switch(selectedAfterCross){
 		case DRIVE_LEFT:
 			scoreAfterMove = false;
 		case SCORE_LEFT:
-			if(selectedDefense == Defense.LOW_BAR_STOP){
-				//do nothing
-			} else if(robotBackwards){
-				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.LEFT_BACKWARDS);
-			} else {
-				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.LEFT_FORWARDS);
-			}
+			pointList.add(new PathPoint(24, 12, robotHeading));
+			pointList.add(new PathPoint(36, 12, Heading.FORWARDS));
+			pointList.add(new PathPoint(0, 0, Heading.BACKWARDS));
+			pointList.add(new PathPoint(0, 0, Heading.BACKWARDS));
 			break;
 		case DRIVE_RIGHT:
 			scoreAfterMove = false;
 		case SCORE_RIGHT:
-			if(selectedDefense == Defense.LOW_BAR_STOP){
-				//are do nothing
-			} else if(robotBackwards){
-				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.RIGHT_BACKWARDS);
-			} else {
-				profile = profiles.getProfile(selectedPosition, AfterCrossDirective.RIGHT_FORWARDS);
-			}
+			pointList.add(new PathPoint(-36, 12, robotHeading));
+			pointList.add(new PathPoint(-36, 24, Heading.BACKWARDS));
+			pointList.add(new PathPoint(-12, 0, Heading.FORWARDS));
+			
 			break;
 		case NOTHING:
+			scoreAfterMove = false;
 			//don't make a profile
 		}
 		
-		if(profile != null){
-			auto.addSequential(new AfterCrossProfile(
-					profile.x1, 
-					profile.x2, 
-					profile.x3, 
-					profile.angle1, 
-					profile.angle2));
-			
-			//only add a score if we moved anyway
-			if(scoreAfterMove){
-				auto.addSequential(new DriveWhileSpit(24.0, 2.0));
+		directives = PathGenerator.generatePath(pointList);
+		if(directives.size() > 0){	
+			for(int i = 0; i+1 == directives.size(); i++){
+				auto.addSequential(new TurnWithGyro(directives.get(i).degreesToTurn));
+				auto.addSequential(new DriveForDistance(directives.get(i).distanceToDrive));
 			}
+		}
+
+		
+		//only add a score if we moved anyway
+		if(scoreAfterMove){
+			auto.addSequential(new DriveWhileSpit(24.0, 2.0));
 		}
 		
 		return auto;
