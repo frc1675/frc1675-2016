@@ -12,9 +12,9 @@ public class Vision extends Subsystem {
 	 
 	 public Vision(){
 		 
-		 server = CameraServer.getInstance();
-	        server.setQuality(100);	        //the camera name (ex "cam0") can be found through the roborio web interface
-	        server.startAutomaticCapture("cam0");
+//		 server = CameraServer.getInstance();
+//	        server.setQuality(100);	        //the camera name (ex "cam0") can be found through the roborio web interface
+//	        server.startAutomaticCapture("cam0");
 	 }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
