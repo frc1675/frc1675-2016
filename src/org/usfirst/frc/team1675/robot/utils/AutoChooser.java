@@ -208,10 +208,10 @@ public class AutoChooser {
 			//don't make a profile
 		}
 		
-		directives = PathGenerator.generatePath(pointList);
+		directives = PathPoint.generatePath(pointList);
 		for(Directive directive : directives){
-			auto.addSequential(new TurnWithGyro(directive.degreesToTurn));
-			auto.addSequential(new DriveForDistance(directive.distanceToDrive));
+			auto.addSequential(new TurnWithGyro(directive.getDegreesToTurn()));
+			auto.addSequential(new DriveForDistance(directive.getDistanceToDrive()));
 		}
 
 		

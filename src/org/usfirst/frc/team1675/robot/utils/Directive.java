@@ -5,12 +5,20 @@ public class Directive {
 	
 	//every directive is an amount to turn then a distance to drive
 	
-	public double degreesToTurn;
-	public double distanceToDrive;
+	private double degreesToTurn;
+	private double distanceToDrive;
 
 	public Directive(double degreesToTurn, double distanceToDrive){
 		this.degreesToTurn = degreesToTurn;
 		this.distanceToDrive = distanceToDrive;
+	}
+	
+	public double getDegreesToTurn(){
+		return degreesToTurn;
+	}
+	
+	public double getDistanceToDrive(){
+		return distanceToDrive;
 	}
 	
 	public String toString(){
