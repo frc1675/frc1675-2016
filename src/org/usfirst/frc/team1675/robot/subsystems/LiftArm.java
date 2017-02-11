@@ -26,33 +26,33 @@ public class LiftArm extends Subsystem {
 				RobotMap.DIOChannels.LIFTER_DOWN_LIMIT_SWITCH);
 	}
 
-	public boolean getLimitValueUp() {
-		return upLimitSwitch.get();
-	}
-
-	public boolean getLimitValueDown() {
-		return downLimitSwitch.get();
-	}
+//	public boolean getLimitValueUp() {
+//		return upLimitSwitch.get();
+//	}
+//
+//	public boolean getLimitValueDown() {
+//		return downLimitSwitch.get();
+//	}
 
 	public void moveArm(double power) {
-		SmartDashboard.putBoolean("Lifter Up", getLimitValueUp());
-		SmartDashboard.putBoolean("Lifter Down", getLimitValueDown());
+//		SmartDashboard.putBoolean("Lifter Up", getLimitValueUp());
+//		SmartDashboard.putBoolean("Lifter Down", getLimitValueDown());
 
-		if (getLimitValueUp() == true) {
-			if (power < 0) {
-				armMotor.set(power);
-			} else {
-				armMotor.set(0);
-			}
-		} else if (getLimitValueDown() == true) {
-			if (power > 0) {
-				armMotor.set(power);
-			} else {
-				armMotor.set(0);
-			}
-		} else {
+//		if (getLimitValueUp() == true) {
+//			if (power < 0) {
+//				armMotor.set(power);
+//			} else {
+//				armMotor.set(0);
+//			}
+//		} else if (getLimitValueDown() == true) {
+//			if (power > 0) {
+//				armMotor.set(power);
+//			} else {
+//				armMotor.set(0);
+//			}c
+//		} else {
 			armMotor.set(power);
-		}
+//		}
 
 		// if (getLimitValueUp() == true ){
 		//
