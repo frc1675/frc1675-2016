@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1675.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -84,7 +85,6 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putString("george", "banana");
 //        chooser.addObject("My Auto", new MyAutoCommand());
-       
     }
 	
 	/**
@@ -115,7 +115,7 @@ public class Robot extends IterativeRobot {
     	//autonomousCommand = new TurnWithGyro(90.0);
 //		autonomousCommand = new DriveForDistance(219.0);
 //    	autonomousCommand = new LowBarSecondRobot();
-		  //autonomousCommand = new TurnWithGyro(90.0);
+//		  autonomousCommand = new TurnWithGyro(90.0);
 		  //autonomousCommand = new DriveStraightForTime(0.5, 3.0);
 		  //autonomousCommand = new ClawArmMoveForXSeconds(0.5, -0.3);
 		 // autonomousCommand = new DriveFOrDistanceAndReportDisplacement(60.0);
@@ -150,6 +150,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        CameraServer.getInstance().startAutomaticCapture();
     }
 
     /**

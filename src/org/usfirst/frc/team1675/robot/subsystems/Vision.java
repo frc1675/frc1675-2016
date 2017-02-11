@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Vision extends Subsystem {
     
-	 CameraServer server;
+	// CameraServer server;
 	 
 	 public Vision(){
-		 
+		// CameraServer.getInstance().startAutomaticCapture();	 
 //		 server = CameraServer.getInstance();
 //	        server.setQuality(100);	        //the camera name (ex "cam0") can be found through the roborio web interface
 //	        server.startAutomaticCapture("cam0");
