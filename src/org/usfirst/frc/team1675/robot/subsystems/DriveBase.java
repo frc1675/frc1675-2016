@@ -71,6 +71,7 @@ public class DriveBase extends Subsystem {
 		rightMid.changeMotionControlFramePeriod(5);
 		leftMid.changeControlMode(TalonControlMode.Follower);
 		leftMid.set(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
+		leftMid.reverseOutput(true);
 	}
 	
 	public void giveTrajectoryPoint(CANTalon.TrajectoryPoint point){
