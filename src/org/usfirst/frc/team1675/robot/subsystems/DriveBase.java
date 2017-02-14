@@ -5,6 +5,7 @@ import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.MotionProfileStatus;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -25,6 +26,9 @@ public class DriveBase extends Subsystem {
 	private SpeedController rightFront;
 	private CANTalon rightMid;
 	private SpeedController rightBack;
+	
+	private MotionProfileStatus leftStatus;
+	private MotionProfileStatus rightStatus;
 
 	private AHRS ahrs;
 	
@@ -41,6 +45,9 @@ public class DriveBase extends Subsystem {
 		ahrs = new AHRS(SerialPort.Port.kMXP);
 		
 		inCheeseDrive = true;
+		
+		leftStatus = new MotionProfileStatus();
+		rightStatus = new MotionProfileStatus();
 	}
 
 	// sets all of the motor powers on the left side
@@ -58,7 +65,40 @@ public class DriveBase extends Subsystem {
 		setRightMidMotorPower(speed);
 		setRightBackMotorPower(speed);
 	}
-
+	public void setTalonMode(){
+		
+		rightMid.changeControlMode(TalonControlMode.MotionProfile);
+		rightMid.changeMotionControlFramePeriod(5);
+		leftMid.changeControlMode(TalonControlMode.Follower);
+		leftMid.set(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
+		leftMid.reverseOutput(true);
+	}
+	
+	public void giveTrajectoryPoint(CANTalon.TrajectoryPoint point){
+		//leftMid.pushMotionProfileTrajectory(point);
+		rightMid.pushMotionProfileTrajectory(point);
+	}
+	
+	public void processBuffers(){
+		//leftMid.processMotionProfileBuffer();
+		rightMid.processMotionProfileBuffer();
+	}
+	
+	public void enableMotionProfile(){
+		//leftMid.set(1.0);
+		rightMid.set(1.0);
+	}
+	
+	public void disableMotionProfile(){
+		//leftMid.set(0);
+		rightMid.set(0);
+	}
+	
+	public void updateMpStatus(MotionProfileStatus status){
+		
+		rightMid.getMotionProfileStatus(status);
+		
+	}
 	/**
 	 * 
 	 * @param speed
@@ -130,5 +170,11 @@ public class DriveBase extends Subsystem {
 			setDefaultCommand(new CheeseDrive());
 			new CheeseDrive().start();
 		}
+	}
+
+	public void clearOldProfiles() {
+		//leftMid.clearMotionProfileTrajectories();
+		rightMid.clearMotionProfileTrajectories();
+		
 	}
 }

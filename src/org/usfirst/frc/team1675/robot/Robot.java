@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1675.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -16,6 +15,7 @@ import org.usfirst.frc.team1675.robot.subsystems.ClawSubSystem;
 import org.usfirst.frc.team1675.robot.commands.auto.FrenchRampsAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarScore;
 import org.usfirst.frc.team1675.robot.commands.auto.LowBarSecondRobot;
+import org.usfirst.frc.team1675.robot.commands.auto.MotionProfileForDummies;
 import org.usfirst.frc.team1675.robot.commands.auto.PortcullisAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RockWallAuto;
 import org.usfirst.frc.team1675.robot.commands.auto.RoughTerrainAuto;
@@ -110,7 +110,9 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
 	  public void autonomousInit() {
-		  autonomousCommand = autoChooser.generateAuto();
+		  System.out.println("Enter auton init");
+		  autonomousCommand = new MotionProfileForDummies();
+		  //autonomousCommand = autoChooser.generateAuto();
 //        autonomousCommand = (Command) chooser.getSelected();
     	//autonomousCommand = new TurnWithGyro(90.0);
 //		autonomousCommand = new DriveForDistance(219.0);
