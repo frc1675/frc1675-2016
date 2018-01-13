@@ -1,10 +1,12 @@
 package org.usfirst.frc.team1675.robot.utils;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class AccelerationSpeedController implements SpeedController, ClearDuringDisable {
 
-	private final SpeedController speedController;
+	private final TalonSRX speedController;
 	private String name;
 	private final static double msPerLoop = 20.0;
 
@@ -18,7 +20,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	boolean inAccelerationSession;
 
-	public AccelerationSpeedController(SpeedController speedController,
+	public AccelerationSpeedController(TalonSRX speedController,
 			double threshold, double rampTime) {
 		this.speedController = speedController;
 		this.threshold = threshold;
@@ -27,9 +29,9 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 		Zamboni.add(this);		
 	}
 
-	public AccelerationSpeedController(SpeedController speedController,
+	public AccelerationSpeedController(TalonSRX speedController,
 			double threshold, double rampTime, String name) {
-		this(speedController, threshold, rampTime);
+		this( speedController, threshold, rampTime);
 		this.name = name;
 	}
 
@@ -41,7 +43,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public double get() {
 
-		return speedController.get();
+		return speedController.getSelectedSensorVelocity(0);
 
 	}
 
@@ -61,11 +63,12 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void set(double speed) {
 		double acceleratedSpeed = accelerate(speed);
-		speedController.set(acceleratedSpeed);
+		speedController.set(speedController.getControlMode(),acceleratedSpeed);
 	}
 
 	public void disable() {
-		speedController.disable();
+		//speedController.disable();
+		speedController.set(speedController.getControlMode(),0);
 	}
 
 	public double accelerate(double speed) {
@@ -100,8 +103,8 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	@Override
 	public void stopMotor() {
-		speedController.stopMotor();
-		
+		//speedController.stopMotor();
+		speedController.set(speedController.getControlMode(), 0);
 	}
 
 	@Override

@@ -4,17 +4,13 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.drivebase.CheeseDrive;
 import org.usfirst.frc.team1675.robot.commands.drivebase.TankDrive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -24,10 +20,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveBase extends Subsystem {
 
 	private SpeedController leftFront;
-	private CANTalon leftMid;
+	private TalonSRX leftMid;
 	private SpeedController leftBack;
 	private SpeedController rightFront;
-	private CANTalon rightMid;
+	private TalonSRX rightMid;
 	private SpeedController rightBack;
 
 	private AHRS ahrs;
@@ -36,10 +32,10 @@ public class DriveBase extends Subsystem {
 
 	public DriveBase() {
 		leftFront = new VictorSP(RobotMap.PWMChannels.LEFT_FRONT_MOTOR);
-		leftMid = new CANTalon(RobotMap.CANDeviceIDs.LEFT_MOTOR);
+		leftMid = new TalonSRX(RobotMap.CANDeviceIDs.LEFT_MOTOR);
 		leftBack = new VictorSP(RobotMap.PWMChannels.LEFT_BACK_MOTOR);
 		rightFront = new VictorSP(RobotMap.PWMChannels.RIGHT_FRONT_MOTOR);
-		rightMid = new CANTalon(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
+		rightMid = new TalonSRX(RobotMap.CANDeviceIDs.RIGHT_MOTOR);
 		rightBack = new VictorSP(RobotMap.PWMChannels.RIGHT_BACK_MOTOR);
 
 		ahrs = new AHRS(SerialPort.Port.kMXP);
@@ -72,7 +68,7 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void setLeftMidMotorPower(double speed) {
-		leftMid.set(speed);
+		leftMid.set(ControlMode.PercentOutput,speed);
 	}
 
 	public void setLeftBackMotorPower(double speed) {
@@ -84,17 +80,17 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void setRightMidMotorPower(double speed) {
-		rightMid.set(-speed);
+		rightMid.set(ControlMode.PercentOutput,-speed);
 	}
 
 	public void setRightBackMotorPower(double speed) {
 		rightBack.set(-speed);
 	}
 
-	public void setTalonsToVoltageMode() {
-		leftMid.changeControlMode(TalonControlMode.PercentVbus);
-		rightMid.changeControlMode(TalonControlMode.PercentVbus);
-	}
+//	public void setTalonsToVoltageMode() {
+	//	leftMid.changeControlMode(TalonControlMode.PercentVbus);
+	//	rightMid.changeControlMode(TalonControlMode.PercentVbus);
+//	}
 
 	public double getAngle() {
 		return ahrs.getAngle();
@@ -106,8 +102,7 @@ public class DriveBase extends Subsystem {
 
 	private double advancedMotorDeadzone(double vector) {
 		double power = (vector / Math.abs(vector))
-				* ((1 - RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE) * (Math
-						.abs(vector) + RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE));
+				* ((1 - RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE) * (Math.abs(vector) + RobotMap.DriveBaseConstants.DRIVE_BASE_MOTOR_DEAD_ZONE));
 		return power;
 
 	}
@@ -120,7 +115,7 @@ public class DriveBase extends Subsystem {
 
 	public int getEncPosition() {
 		// On practice bot only right side encoder works.
-		return rightMid.getEncPosition();
+		return rightMid.getSelectedSensorPosition(0);
 	}
 	
 	public void changeDriveMode(){

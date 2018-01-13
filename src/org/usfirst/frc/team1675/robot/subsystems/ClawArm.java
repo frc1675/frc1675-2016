@@ -4,18 +4,19 @@ import org.usfirst.frc.team1675.robot.RobotMap;
 import org.usfirst.frc.team1675.robot.commands.clawarm.MoveWithControllerAcceleration;
 import org.usfirst.frc.team1675.robot.utils.AccelerationSpeedController;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ClawArm extends Subsystem {
 
-	private CANTalon armMotor;
+	private TalonSRX armMotor;
 	private AccelerationSpeedController accelerationController;
 	private DigitalInput upLimitSwitch;
 	private DigitalInput downLimitSwitch;
@@ -23,14 +24,14 @@ public class ClawArm extends Subsystem {
 	// Visibility (private) Type (SpeedController) Name (armMotor)
 
 	public ClawArm(boolean isInverted) {
-		armMotor = new CANTalon(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
+		armMotor = new TalonSRX(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
 		accelerationController = new AccelerationSpeedController(armMotor,
 				0.10, 160);
 		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
 				RobotMap.ArmConstants.D);
 
-		armMotor.changeControlMode(TalonControlMode.PercentVbus);
+		armMotor.set(ControlMode.PercentOutput,0);
 		upLimitSwitch = new DigitalInput(
 				RobotMap.DIOChannels.ARM_UP_LIMIT_SWITCH);
 		downLimitSwitch = new DigitalInput(
@@ -50,9 +51,9 @@ public class ClawArm extends Subsystem {
 	public void moveArm(double speed) {
 
 		
-		double angle = armMotor.getPosition();
+		double angle = armMotor.getSelectedSensorPosition(0);
 
-		armMotor.changeControlMode(TalonControlMode.PercentVbus);
+		armMotor.set(ControlMode.PercentOutput,0);
 
 		if (angle >= RobotMap.ArmConstants.MINIMUM
 				&& angle <= RobotMap.ArmConstants.MAXIMUM) {
@@ -62,8 +63,8 @@ public class ClawArm extends Subsystem {
 
 	public void setPosition(double position) {
 
-		armMotor.changeControlMode(TalonControlMode.Position);
-		armMotor.set(position);
+		//armMotor.changeControlMode(TalonControlMode.Position);
+		armMotor.set(ControlMode.Position,position);
 
 	}
 
@@ -78,22 +79,22 @@ public class ClawArm extends Subsystem {
 		moveWithinLimitSwitches(accelerationController, power);
 	}
 
-	private void moveWithinLimitSwitches(SpeedController sc, double power) {
+	private void moveWithinLimitSwitch(TalonSRX sc, double power) {
 		//stuff wired wrong on practice robot fix for competition
 		if (getLimitValueUp() == true) {
 			if (power < 0) {
-				sc.set(power);
+				sc.set(sc.getControlMode(),power);
 			} else {
-				sc.set(0);
+				sc.set(sc.getControlMode(),0);
 			}
 		} else if (getLimitValueDown() == true) {
 			if (power > 0) {
-				sc.set(power);
+				sc.set(sc.getControlMode(),power);
 			} else {
-				sc.set(0);
+				sc.set(sc.getControlMode(),0);
 			}
 		} else {
-			sc.set(power);
+			sc.set(sc.getControlMode(),power);
 		}
 	}
 
@@ -104,7 +105,7 @@ public class ClawArm extends Subsystem {
 	}
 
 	public double getPosition() {
-		return armMotor.getPosition();
+		return armMotor.getSelectedSensorPosition(0);
 
 	}
 	
@@ -114,8 +115,8 @@ public class ClawArm extends Subsystem {
 
 	public void stopAndDisable() {
 
-		armMotor.changeControlMode(TalonControlMode.PercentVbus); // change mode
+		armMotor.set(ControlMode.PercentOutput,0); // change mode
 		// to manual
-		armMotor.set(0);
+		//armMotor.set(0);
 	}
 }
