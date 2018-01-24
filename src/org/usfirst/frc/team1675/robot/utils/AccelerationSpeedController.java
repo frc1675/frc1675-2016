@@ -1,10 +1,13 @@
 package org.usfirst.frc.team1675.robot.utils;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class AccelerationSpeedController implements SpeedController, ClearDuringDisable {
 
-	private final SpeedController speedController;
+	private final TalonSRX speedController;
 	private String name;
 	private final static double msPerLoop = 20.0;
 
@@ -18,7 +21,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	boolean inAccelerationSession;
 
-	public AccelerationSpeedController(SpeedController speedController,
+	public AccelerationSpeedController(TalonSRX speedController,
 			double threshold, double rampTime) {
 		this.speedController = speedController;
 		this.threshold = threshold;
@@ -27,9 +30,9 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 		Zamboni.add(this);		
 	}
 
-	public AccelerationSpeedController(SpeedController speedController,
+	public AccelerationSpeedController(TalonSRX speedController,
 			double threshold, double rampTime, String name) {
-		this(speedController, threshold, rampTime);
+		this( speedController, threshold, rampTime);
 		this.name = name;
 	}
 
@@ -41,7 +44,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public double get() {
 
-		return speedController.get();
+		return speedController.getMotorOutputPercent();
 
 	}
 
@@ -52,6 +55,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void setInverted(boolean isInverted) {
 		speedController.setInverted(isInverted);
+		//speedController.setSensorPhase(isInverted); ???
 
 	}
 
@@ -61,11 +65,12 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void set(double speed) {
 		double acceleratedSpeed = accelerate(speed);
-		speedController.set(acceleratedSpeed);
+		speedController.set(ControlMode.PercentOutput,acceleratedSpeed);
 	}
 
 	public void disable() {
-		speedController.disable();
+		//speedController.disable();
+		speedController.set(ControlMode.PercentOutput,0);
 	}
 
 	public double accelerate(double speed) {
@@ -100,8 +105,8 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	@Override
 	public void stopMotor() {
-		speedController.stopMotor();
-		
+		//speedController.stopMotor();
+		speedController.set(ControlMode.PercentOutput, 0);
 	}
 
 	@Override
