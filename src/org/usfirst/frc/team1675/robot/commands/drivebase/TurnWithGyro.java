@@ -45,7 +45,7 @@ public class TurnWithGyro extends PIDCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveBase.setTalonsToVoltageMode();
+    	//Robot.driveBase.setTalonsToVoltageMode();
     	//Robot.driveBase.resetGyro();
     	initialDegrees = Robot.driveBase.getAngle();
     	this.getPIDController().setSetpoint((initialDegrees + degreesSetpoint));

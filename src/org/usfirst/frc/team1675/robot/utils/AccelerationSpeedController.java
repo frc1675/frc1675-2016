@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1675.robot.utils;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -43,7 +44,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public double get() {
 
-		return speedController.getSelectedSensorVelocity(0);
+		return speedController.getMotorOutputPercent();
 
 	}
 
@@ -54,6 +55,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void setInverted(boolean isInverted) {
 		speedController.setInverted(isInverted);
+		//speedController.setSensorPhase(isInverted); ???
 
 	}
 
@@ -63,12 +65,12 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 
 	public void set(double speed) {
 		double acceleratedSpeed = accelerate(speed);
-		speedController.set(speedController.getControlMode(),acceleratedSpeed);
+		speedController.set(ControlMode.PercentOutput,acceleratedSpeed);
 	}
 
 	public void disable() {
 		//speedController.disable();
-		speedController.set(speedController.getControlMode(),0);
+		speedController.set(ControlMode.PercentOutput,0);
 	}
 
 	public double accelerate(double speed) {
@@ -104,7 +106,7 @@ public class AccelerationSpeedController implements SpeedController, ClearDuring
 	@Override
 	public void stopMotor() {
 		//speedController.stopMotor();
-		speedController.set(speedController.getControlMode(), 0);
+		speedController.set(ControlMode.PercentOutput, 0);
 	}
 
 	@Override

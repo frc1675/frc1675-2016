@@ -27,9 +27,10 @@ public class ClawArm extends Subsystem {
 		armMotor = new TalonSRX(RobotMap.CANDeviceIDs.CLAW_ARM_MOTOR);
 		accelerationController = new AccelerationSpeedController(armMotor,
 				0.10, 160);
-		armMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		armMotor.setPID(RobotMap.ArmConstants.P, RobotMap.ArmConstants.I,
-				RobotMap.ArmConstants.D);
+		armMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+		armMotor.config_kP(0,RobotMap.ArmConstants.P, 0);
+		armMotor.config_kI(0,RobotMap.ArmConstants.I, 0);
+		armMotor.config_kD(0,RobotMap.ArmConstants.D, 0);
 
 		armMotor.set(ControlMode.PercentOutput,0);
 		upLimitSwitch = new DigitalInput(
@@ -57,7 +58,7 @@ public class ClawArm extends Subsystem {
 
 		if (angle >= RobotMap.ArmConstants.MINIMUM
 				&& angle <= RobotMap.ArmConstants.MAXIMUM) {
-			moveWithinLimitSwitches(armMotor, speed);
+			moveWithinLimitSwitch(armMotor, speed);
 		}
 	}
 
@@ -70,13 +71,13 @@ public class ClawArm extends Subsystem {
 
 	public void moveWithoutEncoder(double power) {
 		
-		moveWithinLimitSwitches(armMotor, power);
+		moveWithinLimitSwitch(armMotor, power);
 		
 	}
 
 	public void moveWithoutEncoderWithAcceleration(double power) {
 		
-		moveWithinLimitSwitches(accelerationController, power);
+		moveWithinLimitSwitch(accelerationController, power);
 	}
 
 	private void moveWithinLimitSwitch(TalonSRX sc, double power) {
@@ -95,6 +96,24 @@ public class ClawArm extends Subsystem {
 			}
 		} else {
 			sc.set(sc.getControlMode(),power);
+		}
+	}
+	private void moveWithinLimitSwitch(SpeedController sc, double power) {
+		//stuff wired wrong on practice robot fix for competition
+		if (getLimitValueUp() == true) {
+			if (power < 0) {
+				sc.set(power);
+			} else {
+				sc.set(0);
+			}
+		} else if (getLimitValueDown() == true) {
+			if (power > 0) {
+				sc.set(power);
+			} else {
+				sc.set(0);
+			}
+		} else {
+			sc.set(power);
 		}
 	}
 

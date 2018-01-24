@@ -87,10 +87,10 @@ public class DriveBase extends Subsystem {
 		rightBack.set(-speed);
 	}
 
-//	public void setTalonsToVoltageMode() {
-	//	leftMid.changeControlMode(TalonControlMode.PercentVbus);
-	//	rightMid.changeControlMode(TalonControlMode.PercentVbus);
-//	}
+	//public void setTalonsToVoltageMode() {
+		//leftMid.set(ControlMode.PercentOutput);
+		//rightMid.set(ControlMode.PercentOutput);
+	//} unneccesary
 
 	public double getAngle() {
 		return ahrs.getAngle();

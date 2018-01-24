@@ -47,7 +47,7 @@ public class DriveForDistance extends PIDCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveBase.setTalonsToVoltageMode();
+    //	Robot.driveBase.setTalonsToVoltageMode();
     	initialEncoderValue = Robot.driveBase.getEncPosition();
     	this.getPIDController().setSetpoint(initialEncoderValue + (inchesSetpoint * TICKS_PER_INCH));
 
